@@ -42,7 +42,12 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		StackPane p = new StackPane();
-
+		p.setStyle(
+	            "-fx-background-image: url(" +
+	                "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'" +
+	            "); " +
+	            "-fx-background-size: cover;"
+	        );
 		Scene scene = new Scene(p, 400, 400);
 
 		// Background Image
@@ -213,6 +218,13 @@ public class Main extends Application {
 
 				// Setting size for the pane
 				GP.setMinSize(400, 200);
+				
+				GP.setStyle("-fx-padding: 10;" + 
+	                      "-fx-border-style: solid inside;" + 
+	                      "-fx-border-width: 2;" +
+	                      "-fx-border-insets: 5;" + 
+	                      "-fx-border-radius: 5;" + 
+	                      "-fx-border-color: blue;");
 
 				// Setting the padding
 				GP.setPadding(new Insets(10, 10, 10, 10));
