@@ -5,12 +5,18 @@ import java.awt.event.ActionListener;
 //import javax.swing.JFrame;
 import javax.swing.Timer;
 
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +33,10 @@ import javafx.scene.text.TextAlignment;
 public class Main extends Application {
 	// private static int cnt ;
 	public static int cnt;
+	private static Integer STARTTIME = 0;
+	private Timeline timeline;
+	private Label timerLabel = new Label();
+	private IntegerProperty timeSeconds = new SimpleIntegerProperty(STARTTIME);
 
 	@Override
 	public void start(Stage primaryStage) {
@@ -57,10 +67,12 @@ public class Main extends Application {
 		// EventHandler for Button
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 			GridPane GP = new GridPane();
+
 			Scene mainScene = new Scene(GP, 400, 400);
 
 			@Override
 			public void handle(ActionEvent arg0) {
+
 				// TODO Auto-generated method stub
 
 				// Input Label
@@ -72,7 +84,7 @@ public class Main extends Application {
 
 				// Start Button Create
 				Button startButton = new Button();
-				startButton.setText("Start");
+				startButton.setText("Calculate");
 
 				// Start Event
 				EventHandler<ActionEvent> StartEvent = new EventHandler<ActionEvent>() {
@@ -111,72 +123,80 @@ public class Main extends Application {
 						GP.add(Minutes, 2, 3);
 						GP.add(Seconds, 3, 3);
 
-						 boolean loop=true;
-						
-						// Timer Creation
-						Timer timer;
+						timerLabel.textProperty().bind(timeSeconds.asString());
+						STARTTIME = cnt;
 
-						ActionListener actListner = new ActionListener() {
+						// Start Button Create and Event Listener
+						Button newButton = new Button();
+						newButton.setText("Start");
+						newButton.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
 
-							@Override
-							public void actionPerformed(java.awt.event.ActionEvent e) {
-								// TODO Auto-generated method stub
-								// int cnt =Integer.parseInt(InputTextField.getText());
-
-								cnt -= 1;
-								if (cnt == 0) {
-									((Timer) e.getSource()).stop();
+								newButton.setDisable(true);
+								if (timeline != null) {
+									timeline.stop();
 								}
-
-								System.out.println("Counter = " + cnt);
-								// Seconds.setText(String.valueOf(cnt));
+								timeSeconds.set(STARTTIME);
+								timeline = new Timeline();
+								timeline.getKeyFrames().add(
+										new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
+								timeline.playFromStart();
 							}
-						};
+						});
+						Label timeRemaning = new Label("Time Remaining: ");
+						GP.add(timeRemaning, 0, 5);
+						GP.add(timerLabel, 1, 5);
+						GP.add(newButton, 2, 5);
 
-						timer = new Timer(500, actListner);
+						// Restart Button Creation and EventListener
 
-						timer.start();
+						Button RestartButton = new Button("Restart");
+
+						RestartButton.setOnAction(new EventHandler<ActionEvent>() {
+							public void handle(ActionEvent event) {
+								if (!(Days.getText().equals(null) && Hours.getText().equals(null) && Minutes.getText().equals(null)
+										&& Seconds.getText().equals(null))) {
+									
+									Days.setText(null);
+									Hours.setText(null);
+									Minutes.setText(null);
+									Seconds.setText(null);
+
+								}
+								timeline.stop();
+								//timerLabel.setText(null);
+								newButton.setDisable(false);
+							}
+						});
+
+						GP.add(RestartButton, 5, 5);
+
 						// Pause_Continue Button
 						Button Stop_ContinueButton = new Button();
 						Stop_ContinueButton.setText("Stop");
 
 						// EventHandler for Pause_Continue Button
 						EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-							int remaining = 0;
 
 							@Override
 							public void handle(ActionEvent arg0) {
 
 								if (Stop_ContinueButton.getText().equals("Stop")) {
 									Stop_ContinueButton.setText("Continue");
-									timer.stop();
-									remaining = cnt;
-									System.out.println("Checkpoint = " + remaining);
+
+									timeline.pause();
 
 								} else {
 									// while(loop==true) {
 									Stop_ContinueButton.setText("Stop");
 
-									ActionListener resumeListener = new ActionListener() {
+									timeline.play();
 
-										@Override
-										public void actionPerformed(java.awt.event.ActionEvent e) {
-											// TODO Auto-generated method stub
-											remaining -= 1;
-											System.out.println("Counter = " + remaining);
-											if (remaining == 0) {
-												((Timer) e.getSource()).stop();
-											}
-										}
-									};
-									Timer resumeTimer = new Timer(500, resumeListener);
-									resumeTimer.start();
-									// }
 								}
 							}
 						};
 						Stop_ContinueButton.setOnAction(event);
-						GP.add(Stop_ContinueButton, 3, 0);
+						GP.add(Stop_ContinueButton, 3, 5);
 					}
 				};
 				startButton.setOnAction(StartEvent);
@@ -190,8 +210,6 @@ public class Main extends Application {
 				MinutesLabel.setText("Minutes");
 				Label SecondsLabel = new Label();
 				SecondsLabel.setText("Seconds");
-
-				// GridPane Creation and Configure
 
 				// Setting size for the pane
 				GP.setMinSize(400, 200);
