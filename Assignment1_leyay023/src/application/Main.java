@@ -20,7 +20,10 @@ import javafx.util.Duration;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.ProgressIndicator;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -43,11 +46,8 @@ public class Main extends Application {
 
 		StackPane p = new StackPane();
 		p.setStyle(
-	            "-fx-background-image: url(" +
-	                "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'" +
-	            "); " +
-	            "-fx-background-size: cover;"
-	        );
+				"-fx-background-image: url(" + "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'"
+						+ "); " + "-fx-background-size: cover;");
 		Scene scene = new Scene(p, 400, 400);
 
 		// Background Image
@@ -72,6 +72,7 @@ public class Main extends Application {
 		// EventHandler for Button
 		EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
 			GridPane GP = new GridPane();
+			ColumnConstraints column4 = new ColumnConstraints();
 
 			Scene mainScene = new Scene(GP, 400, 400);
 
@@ -79,6 +80,8 @@ public class Main extends Application {
 			public void handle(ActionEvent arg0) {
 
 				// TODO Auto-generated method stub
+				column4.setPercentWidth(10);
+				GP.getColumnConstraints().addAll(column4);
 
 				// Input Label
 				Label InputLabel = new Label();
@@ -129,7 +132,7 @@ public class Main extends Application {
 						GP.add(Seconds, 3, 3);
 
 						timerLabel.textProperty().bind(timeSeconds.asString());
-						STARTTIME = cnt;
+						STARTTIME = Integer.parseInt(InputTextField.getText());
 
 						// Start Button Create and Event Listener
 						Button newButton = new Button();
@@ -137,18 +140,30 @@ public class Main extends Application {
 						newButton.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
 
+								ProgressBar bar = new ProgressBar(0);
+								ProgressIndicator progressIndicator = new ProgressIndicator();
+
+								bar.setPrefSize(200, 24);
+
 								newButton.setDisable(true);
 								if (timeline != null) {
 									timeline.stop();
 								}
 								timeSeconds.set(STARTTIME);
-								timeline = new Timeline();
+								timeline = new Timeline(
+										new KeyFrame(Duration.seconds(2), new KeyValue(bar.progressProperty(), 1)));
 								timeline.getKeyFrames().add(
 										new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
 								timeline.playFromStart();
+								timeline.setOnFinished(endEvent ->progressIndicator.setVisible(false)) ;
+									
+								
+								//GP.add(bar, 6, 6);
+								GP.add(progressIndicator, 5, 5);
 							}
 						});
 						Label timeRemaning = new Label("Time Remaining: ");
+
 						GP.add(timeRemaning, 0, 5);
 						GP.add(timerLabel, 1, 5);
 						GP.add(newButton, 2, 5);
@@ -159,9 +174,9 @@ public class Main extends Application {
 
 						RestartButton.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
-								if (!(Days.getText().equals(null) && Hours.getText().equals(null) && Minutes.getText().equals(null)
-										&& Seconds.getText().equals(null))) {
-									
+								if (!(Days.getText().equals(null) && Hours.getText().equals(null)
+										&& Minutes.getText().equals(null) && Seconds.getText().equals(null))) {
+
 									Days.setText(null);
 									Hours.setText(null);
 									Minutes.setText(null);
@@ -169,12 +184,13 @@ public class Main extends Application {
 
 								}
 								timeline.stop();
-								//timerLabel.setText(null);
+
 								newButton.setDisable(false);
+
 							}
 						});
 
-						GP.add(RestartButton, 5, 5);
+						GP.add(RestartButton, 3, 0);
 
 						// Pause_Continue Button
 						Button Stop_ContinueButton = new Button();
@@ -196,7 +212,6 @@ public class Main extends Application {
 									Stop_ContinueButton.setText("Stop");
 
 									timeline.play();
-
 								}
 							}
 						};
@@ -218,13 +233,6 @@ public class Main extends Application {
 
 				// Setting size for the pane
 				GP.setMinSize(400, 200);
-				
-				GP.setStyle("-fx-padding: 10;" + 
-	                      "-fx-border-style: solid inside;" + 
-	                      "-fx-border-width: 2;" +
-	                      "-fx-border-insets: 5;" + 
-	                      "-fx-border-radius: 5;" + 
-	                      "-fx-border-color: blue;");
 
 				// Setting the padding
 				GP.setPadding(new Insets(10, 10, 10, 10));
