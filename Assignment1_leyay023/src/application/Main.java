@@ -1,9 +1,6 @@
 package application;
 
-import java.awt.event.ActionListener;
-
 //import javax.swing.JFrame;
-import javax.swing.Timer;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -45,12 +42,12 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		StackPane p = new StackPane();
+
+		// Background Image
 		p.setStyle(
 				"-fx-background-image: url(" + "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'"
 						+ "); " + "-fx-background-size: cover;");
 		Scene scene = new Scene(p, 400, 400);
-
-		// Background Image
 
 		// Title Creatio and Configure
 		Text TimerTitle = new Text();
@@ -90,9 +87,9 @@ public class Main extends Application {
 				// TextField Creation
 				TextField InputTextField = new TextField();
 
-				// Start Button Create
-				Button startButton = new Button();
-				startButton.setText("Calculate");
+				// Calculation Button Create
+				Button CalButton = new Button();
+				CalButton.setText("Calculate");
 
 				// Start Event
 				EventHandler<ActionEvent> StartEvent = new EventHandler<ActionEvent>() {
@@ -100,12 +97,15 @@ public class Main extends Application {
 					@Override
 					public void handle(ActionEvent arg0) {
 						// TODO Auto-generated method stub
+						// Check for user input
 						try {
 							cnt = Integer.parseInt(InputTextField.getText());
 						} catch (IllegalArgumentException e) {
 							System.out.println("Wrong Input Type");
 							System.exit(0);
 						}
+						
+						// Algorithym to calculate days, hours, minutes, seconds
 						int secondsInInt = cnt;
 						int days = secondsInInt / (24 * 3600);
 
@@ -125,7 +125,8 @@ public class Main extends Application {
 						Minutes.setText(String.valueOf(minutes));
 						Label Seconds = new Label();
 						Seconds.setText(String.valueOf(seconds));
-
+						
+						// Add all labels to GridPane
 						GP.add(Days, 0, 3);
 						GP.add(Hours, 1, 3);
 						GP.add(Minutes, 2, 3);
@@ -135,9 +136,9 @@ public class Main extends Application {
 						STARTTIME = Integer.parseInt(InputTextField.getText());
 
 						// Start Button Create and Event Listener
-						Button newButton = new Button();
-						newButton.setText("Start");
-						newButton.setOnAction(new EventHandler<ActionEvent>() {
+						Button startButton = new Button();
+						startButton.setText("Start");
+						startButton.setOnAction(new EventHandler<ActionEvent>() {
 							public void handle(ActionEvent event) {
 
 								ProgressBar bar = new ProgressBar(0);
@@ -145,7 +146,7 @@ public class Main extends Application {
 
 								bar.setPrefSize(200, 24);
 
-								newButton.setDisable(true);
+								startButton.setDisable(true);
 								if (timeline != null) {
 									timeline.stop();
 								}
@@ -155,10 +156,9 @@ public class Main extends Application {
 								timeline.getKeyFrames().add(
 										new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
 								timeline.playFromStart();
-								timeline.setOnFinished(endEvent ->progressIndicator.setVisible(false)) ;
-									
-								
-								//GP.add(bar, 6, 6);
+								timeline.setOnFinished(endEvent -> progressIndicator.setVisible(false));
+
+								// Add "Start Button" to GridPane
 								GP.add(progressIndicator, 5, 5);
 							}
 						});
@@ -166,7 +166,7 @@ public class Main extends Application {
 
 						GP.add(timeRemaning, 0, 5);
 						GP.add(timerLabel, 1, 5);
-						GP.add(newButton, 2, 5);
+						GP.add(startButton, 2, 5);
 
 						// Restart Button Creation and EventListener
 
@@ -185,7 +185,7 @@ public class Main extends Application {
 								}
 								timeline.stop();
 
-								newButton.setDisable(false);
+								startButton.setDisable(false);
 
 							}
 						});
@@ -208,7 +208,7 @@ public class Main extends Application {
 									timeline.pause();
 
 								} else {
-									// while(loop==true) {
+									
 									Stop_ContinueButton.setText("Stop");
 
 									timeline.play();
@@ -219,9 +219,9 @@ public class Main extends Application {
 						GP.add(Stop_ContinueButton, 3, 5);
 					}
 				};
-				startButton.setOnAction(StartEvent);
+				CalButton.setOnAction(StartEvent);
 
-				// Label for Days, Hours, Minutes, Seconds
+				// Set Label text for Days, Hours, Minutes, Seconds
 				Label DaysLabel = new Label();
 				DaysLabel.setText("Days");
 				Label HoursLabel = new Label();
@@ -241,18 +241,22 @@ public class Main extends Application {
 				GP.setVgap(10);
 				GP.setHgap(10);
 
-				// Setting the Grid alignment
-				GP.setStyle("-fx-background-color: lightgray;");
+				// Setting the Grid alignment and background colour
+				GP.setStyle("-fx-background-color: blue;");
 				GP.setAlignment(Pos.CENTER);
-
+				
+				// Add all children to GridPane
 				GP.add(DaysLabel, 0, 2);
 				GP.add(HoursLabel, 1, 2);
 				GP.add(MinutesLabel, 2, 2);
 				GP.add(SecondsLabel, 3, 2);
 				GP.add(InputLabel, 0, 0);
 				GP.add(InputTextField, 1, 0);
-
-				GP.add(startButton, 2, 0);
+				
+				//Add Calculation button to GridPane
+				GP.add(CalButton, 2, 0);
+				
+				// MainScreen Focus
 				primaryStage.setScene(mainScene);
 				primaryStage.show();
 			}
@@ -263,7 +267,7 @@ public class Main extends Application {
 		p.getChildren().add(TimerTitle);
 		p.getChildren().add(button1);
 		scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-		primaryStage.setTitle("Timer - CountDown");
+		primaryStage.setTitle("Timer-CountDown");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
