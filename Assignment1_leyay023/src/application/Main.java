@@ -104,7 +104,7 @@ public class Main extends Application {
 							System.out.println("Wrong Input Type");
 							System.exit(0);
 						}
-						
+
 						// Algorithym to calculate days, hours, minutes, seconds
 						int secondsInInt = cnt;
 						int days = secondsInInt / (24 * 3600);
@@ -125,7 +125,7 @@ public class Main extends Application {
 						Minutes.setText(String.valueOf(minutes));
 						Label Seconds = new Label();
 						Seconds.setText(String.valueOf(seconds));
-						
+
 						// Add all labels to GridPane
 						GP.add(Days, 0, 3);
 						GP.add(Hours, 1, 3);
@@ -206,9 +206,14 @@ public class Main extends Application {
 									Stop_ContinueButton.setText("Continue");
 
 									timeline.pause();
+									do {
+
+										System.out.println("Checkpoint: " + timerLabel.getText());
+
+									} while (Stop_ContinueButton.isPressed());
 
 								} else {
-									
+
 									Stop_ContinueButton.setText("Stop");
 
 									timeline.play();
@@ -244,7 +249,7 @@ public class Main extends Application {
 				// Setting the Grid alignment and background colour
 				GP.setStyle("-fx-background-color: blue;");
 				GP.setAlignment(Pos.CENTER);
-				
+
 				// Add all children to GridPane
 				GP.add(DaysLabel, 0, 2);
 				GP.add(HoursLabel, 1, 2);
@@ -252,10 +257,10 @@ public class Main extends Application {
 				GP.add(SecondsLabel, 3, 2);
 				GP.add(InputLabel, 0, 0);
 				GP.add(InputTextField, 1, 0);
-				
-				//Add Calculation button to GridPane
+
+				// Add Calculation button to GridPane
 				GP.add(CalButton, 2, 0);
-				
+
 				// MainScreen Focus
 				primaryStage.setScene(mainScene);
 				primaryStage.show();
