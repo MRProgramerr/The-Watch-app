@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.Scene;
@@ -42,7 +43,8 @@ public class Main extends Application {
 	public void start(Stage primaryStage) {
 
 		StackPane p = new StackPane();
-
+		BorderPane bp = new BorderPane();
+		Meeting_Agenda_Layout mla = new Meeting_Agenda_Layout();
 		// Background Image
 		p.setStyle(
 				"-fx-background-image: url(" + "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'"
@@ -71,7 +73,7 @@ public class Main extends Application {
 			GridPane GP = new GridPane();
 			ColumnConstraints column4 = new ColumnConstraints();
 
-			Scene mainScene = new Scene(GP, 400, 400);
+			Scene mainScene = new Scene(bp, 1200, 800);
 
 			@Override
 			public void handle(ActionEvent arg0) {
@@ -261,6 +263,8 @@ public class Main extends Application {
 				// Add Calculation button to GridPane
 				GP.add(CalButton, 2, 0);
 
+				bp.setLeft(GP);
+				bp.setRight(mla.getAgenda_vbox());
 				// MainScreen Focus
 				primaryStage.setScene(mainScene);
 				primaryStage.show();
