@@ -3,19 +3,18 @@ package application;
 import javafx.scene.text.Text;
 
 public class Meeting_Agenda {
-    private Text meeting_name;
+    private Text taskname;
     private Text meeting_agenda;
     private Text meeting_sec;
     private Text meeting_hours;
     private Text meeitng_minute;
-    private Text meeting_days;
 
-    public Text getMeeting_name() {
-        return this.meeting_name;
+    public Text getTaskname() {
+        return this.taskname;
     }
 
-    public void setMeeting_name(Text meeting_name) {
-        this.meeting_name = meeting_name;
+    public void setTaskname(Text taskname) {
+        this.taskname = taskname;
     }
 
     public Text getMeeting_agenda() {
@@ -50,18 +49,11 @@ public class Meeting_Agenda {
         this.meeitng_minute = meeitng_minute;
     }
 
-    public Text getMeeting_days() {
-        return this.meeting_days;
-    }
 
-    public void setMeeting_days(Text meeting_days) {
-        this.meeting_days = meeting_days;
-    }
 
     public Meeting_Agenda(Text meeting_name, Text meeting_agenda, Text meeting_sec, Text meeting_hours, Text meeitng_minute, Text meeting_days) {
         this.meeting_agenda = meeting_agenda;
-        this.meeting_name = meeting_name;
-        this.meeting_days = meeting_days;
+        this.taskname = meeting_name;
         this.meeting_hours = meeting_hours;
         this.meeitng_minute = meeitng_minute;
         this.meeting_sec = meeting_sec;

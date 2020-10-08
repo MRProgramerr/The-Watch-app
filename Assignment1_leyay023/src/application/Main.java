@@ -271,6 +271,7 @@ public class Main extends Application {
 			}
 		};
 
+
 		button1.setOnAction(event);
 
 		p.getChildren().add(TimerTitle);
@@ -279,6 +280,16 @@ public class Main extends Application {
 		primaryStage.setTitle("Timer-CountDown");
 		primaryStage.setScene(scene);
 		primaryStage.show();
+	}
+
+	public boolean checktime(TextField txt){
+		try {
+			cnt = Integer.parseInt(txt.getText());
+		} catch (IllegalArgumentException e) {
+			return  false;
+
+		}
+		return true;
 	}
 
 	public static void main(String[] args) {
