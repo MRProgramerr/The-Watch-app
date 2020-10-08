@@ -265,6 +265,7 @@ public class Main extends Application {
 
 				bp.setLeft(GP);
 				bp.setRight(mla.getAgenda_vbox());
+
 				// MainScreen Focus
 				primaryStage.setScene(mainScene);
 				primaryStage.show();

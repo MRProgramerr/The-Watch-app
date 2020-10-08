@@ -290,17 +290,6 @@ public class Time {
 		primaryStage.show();
 		
 }
-public boolean validate(TextField txt){
-	try {
-		cnt = Integer.parseInt(txt.getText());
-	} catch (IllegalArgumentException e) {
-		Alert a = new Alert(AlertType.WARNING, "Wrong Input Type");
-		a.setAlertType(AlertType.ERROR);
-		a.show();
 
-
-	}
-
-}
 }
 
