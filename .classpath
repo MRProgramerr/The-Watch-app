@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="Assignment1_leyay023/src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/javaFx"/>
+	<classpathentry kind="output" path="Assignment1_leyay023/bin"/>
+</classpath>
