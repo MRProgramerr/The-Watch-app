@@ -10,6 +10,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
@@ -288,6 +290,17 @@ public class Time {
 		primaryStage.show();
 		
 }
-	
+public boolean validate(TextField txt){
+	try {
+		cnt = Integer.parseInt(txt.getText());
+	} catch (IllegalArgumentException e) {
+		Alert a = new Alert(AlertType.WARNING, "Wrong Input Type");
+		a.setAlertType(AlertType.ERROR);
+		a.show();
+
+
+	}
+
+}
 }
 
