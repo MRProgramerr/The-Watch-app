@@ -16,61 +16,19 @@
 
 	public class Time {
 		// private static int cnt ;
-		public static int cnt;
-		private  Integer STARTTIMEsec = 0;
-		private  Integer STARTTIMEhours = 0;
-		private  Integer STARTTIMEmins = 0;
-		private Timeline timelinesecs;
-		private Timeline timelinehours;
-		private Timeline timelinemins;
 		public Time() {
-//			System.out.print(hours+minutes+secs);
-
-			TimerLayout tml = new TimerLayout();
-			timelinesecs = new Timeline();
-			timelinemins = new Timeline();
-			timelinehours = new Timeline();
 
 
 			// Algorithym to calculate days, hour
 			// s, minutes, seconds
 		}
-			public void startTimer(int hours,int minutes,int secs){
 
 			TimerLayout tml = new TimerLayout();
-			STARTTIMEsec = secs;
-			STARTTIMEhours = hours;
-			STARTTIMEmins = minutes;
-
-			tml.getSeconds().setText(STARTTIMEsec.toString());
-			tml.getHours().setText(STARTTIMEhours.toString());
-			tml.getMinutes().setText(STARTTIMEmins.toString());
 
 
 //			ProgressBar bar = new ProgressBar(0);
 //			ProgressIndicator progressIndicator = new ProgressIndicator();
 ///			bar.setPrefSize(200, 24);
-			if (timelinesecs != null  && timelinehours != null&& timelinemins != null) {
-			timelinesecs.stop();
-			timelinehours.stop();
-			timelinemins.stop();
-			}
-
-
-			timelinesecs.setCycleCount(Timeline.INDEFINITE);
-			timelinesecs.getKeyFrames().add(
-
-			new KeyFrame(Duration.seconds(1), new EventHandler<ActionEvent>() {
-			@Override
-				public void handle(ActionEvent actionEvent) {
-					STARTTIMEsec--;
-					tml.getSeconds().setText(STARTTIMEsec.toString());
-					if(STARTTIMEsec <=0 ){
-						timelinesecs.stop();
-					}
-				}
-			}));
-			timelinesecs.playFromStart();
 
 									//timeline.setOnFinished(endEvent -> progressIndicator.setVisible(false));
 		}
@@ -138,7 +96,6 @@
 
 
 
-			}
 
 
 

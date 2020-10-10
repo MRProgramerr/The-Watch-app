@@ -76,7 +76,7 @@ public class Controller {
             public void handle(ActionEvent arg0) {
 
                 bp.setCenter(tml.getTimelayout());
-                bp.setStyle("-fx-background-color:#000000 ");
+                bp.setStyle("-fx-background-color:# ");
                 bp.setRight(mla.getAgenda_vbox());
                 // MainScreen Focus
                 primaryStage.setScene(mainScene);

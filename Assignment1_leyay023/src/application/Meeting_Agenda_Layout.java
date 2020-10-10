@@ -72,7 +72,7 @@ public class Meeting_Agenda_Layout {
         meeitng_minute.setPrefWidth(30.0D);
         meeting_hours.setPromptText("00");
         meeting_hours.setPrefWidth(30.0D);
-        add = new Button("+");
+        add = new Button("Add");
 
         hoursLabel.setText("H");
         minLabel.setText("Min");
@@ -162,16 +162,13 @@ public class Meeting_Agenda_Layout {
         table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Meeting_Agenda>() {
             @Override
             public void onChanged(Change<? extends Meeting_Agenda> change) {
-                Time time = new Time();
+                TimerLayout tml = new TimerLayout();
                 for(Meeting_Agenda ma : change.getList()){
                     int hours = Integer.parseInt(ma.getMeeting_hours().getText());
                     int mins = Integer.parseInt(ma.getMeeitng_minute().getText());
                     int sec = Integer.parseInt(ma.getMeeting_sec().getText());
 
-
-
-                    time.startTimer(hours,mins,sec);
-
+                   tml.startTimer(hours,mins,sec);
                 }
             }
 
@@ -190,6 +187,7 @@ public class Meeting_Agenda_Layout {
 
     public boolean validateTime(TextField txt, String name) {
         try {
+
             int cnt = Integer.parseInt(txt.getText());
             return true;
         }
