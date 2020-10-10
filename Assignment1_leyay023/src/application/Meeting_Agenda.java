@@ -10,7 +10,7 @@ public class Meeting_Agenda {
     private Text meeting_sec;
     private Text meeting_hours;
     private Text meeitng_minute;
-    private Button Select;
+    public Button Select;
 
     public Text getTaskname() {
         return this.taskname;

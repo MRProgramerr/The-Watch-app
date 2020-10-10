@@ -42,7 +42,7 @@ public class Main extends Application {
 	@Override
 	public void start(Stage primaryStage) {
 
-		TimerLayout tml = new TimerLayout(1200,700);
+		Controller control = new Controller(1200,700);
 
 //		StackPane p = new StackPane();
 //		BorderPane bp = new BorderPane();

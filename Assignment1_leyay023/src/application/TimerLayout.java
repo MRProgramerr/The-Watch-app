@@ -9,6 +9,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.*;
@@ -25,14 +27,85 @@ public class TimerLayout {
     private VBox dots1 = new VBox();
     private Text dot = new Text();
     private Text dot1 = new Text();
-
     private HBox container = new HBox();
+    private VBox timelayout = new VBox();
+    public Button startButton;
+    public Button stopButton;
+    public Button terminateButton;
+    public  HBox playpause;
+
+
+    public Button getStartButton() {
+        return startButton;
+    }
+
+    public void setStartButton(Button startButton) {
+        this.startButton = startButton;
+    }
+
+    public Button getStopButton() {
+        return stopButton;
+    }
+
+    public void setStopButton(Button stopButton) {
+        this.stopButton = stopButton;
+    }
+
+    public Button getTerminateButton() {
+        return terminateButton;
+    }
+
+    public void setTerminateButton(Button terminateButton) {
+        this.terminateButton = terminateButton;
+    }
+
+    public  void setPlaypause(HBox playpause) {
+        this.playpause = playpause;
+    }
+
+    public  HBox getPlaypause() {
+        return playpause;
+    }
+
 
     public HBox getContainer() {
         return container;
     }
 
-    public  TimerLayout(double x, double y){
+    public Button getSeconds() {
+        return Seconds;
+    }
+
+    public void setSeconds(Button seconds) {
+        Seconds = seconds;
+    }
+
+    public Button getMinutes() {
+        return Minutes;
+    }
+
+    public void setMinutes(Button minutes) {
+        Minutes = minutes;
+    }
+
+    public Button getHours() {
+        return Hours;
+    }
+
+    public void setHours(Button hours) {
+        Hours = hours;
+    }
+
+    public VBox getTimelayout() {
+        return timelayout;
+    }
+
+    public void setTimelayout(VBox timelayout) {
+        this.timelayout = timelayout;
+    }
+
+    public  TimerLayout() {
+
         dot.setText(".");
         dot1.setText(".");
         dot.setStyle("-fx-text-fill : white");
@@ -43,145 +116,60 @@ public class TimerLayout {
         dot1.prefHeight(5);
         dot1.prefWidth(5);
 
-        dots.getChildren().addAll(dot1,dot);
-        dots1.getChildren().addAll(dot1,dot);
+        dots.getChildren().addAll(dot1, dot);
+        dots1.getChildren().addAll(dot1, dot);
+
+        Image start = new Image("/start.png",50,50,true,true);
+        Image stop = new Image("/stop.png",50,50,true,true);
+        Image terminate = new Image("/terminate.png",50,50,true,true);
+
+        startButton =  tobutton(start);
+        stopButton = tobutton(stop);
+        terminateButton = tobutton(terminate);
+
+        playpause = new HBox();
+        playpause.getChildren().addAll(startButton,stopButton,terminateButton);
+        playpause.setSpacing(20);
+        playpause.setAlignment(Pos.CENTER);
+        playpause.setDisable(true);
+
         //dots.setSpacing(5);
         Hours.setText("00");
         Minutes.setText("00");
         Seconds.setText("00");
+
         container.setSpacing(10);
-        container.getChildren().addAll(Hours,dots,Minutes,dots1,Seconds);
+        container.getChildren().addAll(Hours, dots, Minutes, dots1, Seconds);
         container.setAlignment(Pos.CENTER);
 
-        Stage primaryStage = new Stage();
-        StackPane p = new StackPane();
-        BorderPane bp = new BorderPane();
-        Meeting_Agenda_Layout mla = new Meeting_Agenda_Layout();
-        // Background Image
-        //
-        p.setStyle(
-                "-fx-background-image: url(" + "'http://icons.iconarchive.com/icons/iconka/meow/256/cat-box-icon.png'"
-                        + "); " + "-fx-background-size: cover;");
-        Scene scene = new Scene(p, x, y);
+        timelayout.setAlignment(Pos.CENTER);
+        timelayout.getChildren().addAll(container,playpause);
+        timelayout.setSpacing(20);
 
-//        // Title Creatio and Configure
-//        Text TimerTitle = new Text();
-//        TimerTitle.setTextAlignment(TextAlignment.CENTER);
-//        TimerTitle.setStrokeWidth(2);
-//        TimerTitle.setStroke(Color.BLUE);
-//        TimerTitle.setFont(Font.font("verdana", FontWeight.BOLD, FontPosture.REGULAR, 20));
-//        TimerTitle.setFill(Color.BROWN);
-
-        // Button Creation and Configure
-        Button button1 = new Button();
-        button1.setText("Start");
-        button1.setLayoutX(500);
-        button1.setLayoutY(100);
-        StackPane.setAlignment(button1, Pos.CENTER);
-
-        // EventHandler for Button
-        EventHandler<ActionEvent> event = new EventHandler<ActionEvent>() {
-
-            Scene mainScene = new Scene(bp, 1200, 700);
-
-            @Override
-            public void handle(ActionEvent arg0){
-
-                // Start Event
-                EventHandler<ActionEvent> StartEvent = new EventHandler<ActionEvent>() {
-
-                    @Override
-                    public void handle(ActionEvent arg0) {
-                        // Check for user input
-
-                        // Algorithym to calculate days, hours, minutes, seconds
-
-//						startButton.setOnAction(new EventHandler<ActionEvent>() {
-//							public void handle(ActionEvent event) {
-//
-//								ProgressBar bar = new ProgressBar(0);
-//								ProgressIndicator progressIndicator = new ProgressIndicator();
-//
-//								bar.setPrefSize(200, 24);
-//
-//								startButton.setDisable(true);
-//								if (timeline != null) {
-//									timeline.stop();
-//								}
-//								timeSeconds.set(STARTTIME);
-//								timeline = new Timeline(
-//										new KeyFrame(Duration.seconds(2), new KeyValue(bar.progressProperty(), 1)));
-//								timeline.getKeyFrames().add(
-//										new KeyFrame(Duration.seconds(STARTTIME + 1), new KeyValue(timeSeconds, 0)));
-//								timeline.playFromStart();
-//								timeline.setOnFinished(endEvent -> progressIndicator.setVisible(false));
-//
-//								// Add "Start Button" to GridPane
-//
-//							}
-//						});
-
-
-                        // Restart Button Creation and EventListener
-
-//						Button RestartButton = new Button("Restart");
-//
-//						RestartButton.setOnAction(new EventHandler<ActionEvent>() {
-//							public void handle(ActionEvent event) {
-//								if (!(Days.getText().equals(null) && Hours.getText().equals(null)
-//										&& Minutes.getText().equals(null) && Seconds.getText().equals(null))) {
-//
-//									Days.setText(null);
-//									Hours.setText(null);
-//									Minutes.setText(null);
-//									Seconds.setText(null);
-//
-//								}
-//								timeline.stop();
-//
-//								startButton.setDisable(false);
-//
-//							}
-//						});
-
-                        // Pause_Continue Button
-                        Button Stop_ContinueButton = new Button();
-                        Stop_ContinueButton.setText("Stop");
-
-                        // EventHandler for Pause_Continue Button
-                    }
-                };
-      //          start.setOnAction(StartEvent);
-
-
-                bp.setCenter(getContainer());
-                bp.setStyle("-fx-background-color:#2a2a2a ");
-    			bp.setRight(mla.getAgenda_vbox());
-                // MainScreen Focus
-                primaryStage.setScene(mainScene);
-                primaryStage.setMaximized(true);
-                primaryStage.show();
-            }
-        };
-
-        button1.setOnAction(event);
-
-//        p.getChildren().add(TimerTitle);
-        p.getChildren().add(button1);
-        scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-        primaryStage.setTitle("Timer-CountDown");
-        primaryStage.setScene(scene);
-        primaryStage.show();
 
     }
-    public static Button timebox(){
+    //refernce: http://tutorials.jenkov.com/javafx/button.html
+    public Button timebox() {
         Button button = new Button();
         button.setPrefWidth(200);
         button.setPrefHeight(200);
-        button.setTextAlignment(TextAlignment.CENTER);
-        button.setStyle(" -fx-background-color:#2a2a2a ; -fx-text-fill : white  ;-fx-font-size: 50pt");
+//       button.setTextAlignment(TextAlignment.CENTER);
+        button.setStyle(" -fx-background-color:#000000 ; -fx-text-fill : white  ;-fx-font-size: 50pt");
 
         return button;
 
     }
+    //Referenc - https://www.tutorialspoint.com/how-to-add-an-image-to-a-button-action-in-javafx
+    public Button tobutton(Image img){
+        ImageView imgView = new ImageView(img);
+        Button button = new Button();
+        button.setGraphic(imgView);
+        button.setStyle("-fx-background-color:#000000 ");
+        button.setPrefHeight(25);
+        button.setPrefWidth(25);
+
+        return button;
 }
+}
+
+
