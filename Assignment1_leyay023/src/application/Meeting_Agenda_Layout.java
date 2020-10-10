@@ -1,12 +1,15 @@
 
 package application;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -15,9 +18,10 @@ import java.util.ArrayList;
 
 public class Meeting_Agenda_Layout {
     private static GridPane Agenda_Pane = new GridPane();
+    private TableView table = new TableView();
     private static VBox Agenda_vbox = new VBox();
-    private static HBox footer = new HBox();
-    private static GridPane Agendas = new GridPane();
+    private static HBox Navbar = new HBox();
+    private static VBox Agendas = new VBox();
     private TextField taskname = new TextField();
     private TextField meeting_agenda = new TextField();
     private TextField meeting_sec = new TextField();
@@ -29,8 +33,7 @@ public class Meeting_Agenda_Layout {
     private Label secLabel = new Label();
     private Label minLabel = new Label();
     private boolean check = true;
-    private static ArrayList<Meeting_Agenda> tasksList = new ArrayList<Meeting_Agenda>();
-
+    private static ObservableList<Meeting_Agenda> tasksList = FXCollections.observableArrayList();
 
 
     private Button start;
@@ -48,28 +51,28 @@ public class Meeting_Agenda_Layout {
         Agenda_vbox = agenda_vbox;
     }
 
-    public static GridPane getAgendas() {
+    public static VBox getAgendas() {
         return Agendas;
     }
 
-    public static void setAgendas(GridPane agendas) {
+    public static void setAgendas(VBox agendas) {
         Agendas = agendas;
     }
 
     public Meeting_Agenda_Layout() {
         remove =  new Button("X");
-        this.meeting_agenda.setPromptText("Agenda");
-        this.meeting_agenda.setPrefWidth(100.0D);
-        this.meeting_agenda.setPrefHeight(30.0D);
-        this.taskname.setPromptText("Task");
-        this.taskname.setPrefWidth(100.0D);
-        this.meeting_sec.setPromptText("00");
-        this.meeting_sec.setPrefWidth(30.0D);
-        this.meeitng_minute.setPromptText("00");
-        this.meeitng_minute.setPrefWidth(30.0D);
-        this.meeting_hours.setPromptText("00");
-        this.meeting_hours.setPrefWidth(30.0D);
-        this.add = new Button("+");
+        meeting_agenda.setPromptText("Agenda");
+        meeting_agenda.setPrefWidth(100.0D);
+        meeting_agenda.setPrefHeight(30.0D);
+        taskname.setPromptText("Task");
+        taskname.setPrefWidth(100.0D);
+        meeting_sec.setPromptText("00");
+        meeting_sec.setPrefWidth(30.0D);
+        meeitng_minute.setPromptText("00");
+        meeitng_minute.setPrefWidth(30.0D);
+        meeting_hours.setPromptText("00");
+        meeting_hours.setPrefWidth(30.0D);
+        add = new Button("+");
 
         hoursLabel.setText("H");
         minLabel.setText("Min");
@@ -77,9 +80,45 @@ public class Meeting_Agenda_Layout {
         agendaLabel.setText("Agenda");
         taskLabel.setText("Task");
 
-        Agendas.setPrefHeight(500);
-        Agendas.setPrefWidth(200);
-        Agendas.setVgap(10);
+        table.setEditable(true);
+
+        TableColumn agendaCol = new TableColumn("Agendas");
+        TableColumn subtaskCol = new TableColumn("Sub-Tasks");
+        TableColumn thrs = new TableColumn("H");
+        TableColumn tmins = new TableColumn("M");
+        TableColumn tsecs = new TableColumn("S");
+        TableColumn tselect = new TableColumn("Select");
+
+
+        agendaCol.setMinWidth(100);
+        agendaCol.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_agenda"));
+        subtaskCol.setMinWidth(200);
+        subtaskCol.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("taskname"));
+        thrs.setMinWidth(20);
+        thrs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_hours"));
+
+        tmins.setMinWidth(20);
+        tmins.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeitng_minute"));
+
+        tsecs.setMinWidth(20);
+        tsecs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_sec"));
+
+        tselect.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,Button>("Select"));
+
+
+        // tselect.setMinWidth(20);
+
+
+
+        table.getColumns().addAll(agendaCol,subtaskCol,thrs,tmins,tsecs,tselect);
+        table.setItems(tasksList);
+
+
+        Agendas.setPadding(new Insets(10,10,10,10));
+        Agendas.getChildren().add(table);
+        Agendas.setStyle("-fx-background-color: chocolate;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, " +
+                "0, 0); ");
+
         Agenda_Pane.add(taskLabel,0,0);
         Agenda_Pane.add(new Text("     "),1,0);
         Agenda_Pane.add(hoursLabel,2,0);
@@ -99,23 +138,25 @@ public class Meeting_Agenda_Layout {
 
         Agenda_Pane.setPadding(new Insets(10.0D, 10.0D, 10.0D, 10.0D));
 
-        Agenda_vbox.getChildren().addAll(agendaLabel,meeting_agenda, Agenda_Pane,Agendas);
+        Agenda_vbox.getChildren().addAll(agendaLabel,meeting_agenda, Agenda_Pane,table);
         Agenda_vbox.setPadding(new Insets(20.0D, 20.0D, 20.0D, 10.0D));
 
 
         //Agendas.setBackground(new Background(new BackgroundFill(Color.CHOCOLATE,null,null)));
-        Agendas.setStyle("-fx-background-color: chocolate;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, " +
-                "0, 0); ");
-        Agendas.setPadding(new Insets(10,10,10,10));
+
         if(tasksList.size()==0 && check == true)
         add.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
                     if((validateAgenda(meeting_agenda,"Agenda") && validateAgenda(taskname,"task") )|| validateTime(meeitng_minute, "minute") || validateTime(meeting_hours,"hours") || validateTime(meeting_sec,"secomd")) {
-                        Meeting_Agenda agenda = new Meeting_Agenda(taskname.getText(), meeting_agenda.getText(), meeting_sec.getText(), meeting_hours.getText(), meeitng_minute.getText());
-                        tasksList.add(agenda);
-                        storetask();
-                }
+                        tasksList.add(new Meeting_Agenda(meeting_agenda.getText(),taskname.getText(), meeting_hours.getText(),meeitng_minute.getText(),meeting_sec.getText(),new Button("Select")));
+                        meeting_agenda.clear();
+                        meeting_sec.clear();
+                        meeting_hours.clear();
+                        meeitng_minute.clear();
+                        taskname.clear();
+
+                    }
                     else
                     {
                         Alert a = new Alert(Alert.AlertType.WARNING, "Please fill all the fields");
@@ -126,54 +167,7 @@ public class Meeting_Agenda_Layout {
 
         });
 
-    }
 
-    private GridPane storetask() {
-
-
-//        GridPane taskbox = new GridPane();
-//        taskbox.setStyle("-fx-background-color: white;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, " +
-//                "0, 0); ");
-//        taskbox.setPrefWidth(90);
-//        taskbox.setMaxHeight(30);
-//        taskbox.setPadding(new Insets(10, 10, 10, 10));
-//        taskbox.setHgap(20);
-//        taskbox.setVgap(10);
-
-        Agendas.getChildren().clear();
-
-        int col=0;
-        int row=1;
-        for (int i = 0; i < tasksList.size(); i++){
-
-        Agendas.add(tasksList.get(i).getMeeting_agenda(), col, row);
-        Agendas.add(new Text(tasksList.get(i).getTaskname().getText() + "   "), col, row+1);
-        Agendas.add(new Text(tomins(tasksList.get(i).getMeeting_hours().getText(),tasksList.get(i).getMeeitng_minute().getText(),tasksList.get(i).getMeeting_sec().getText())+" mins"), col+1, row+1);
-        Agendas.add(tasksList.get(i).getSelect(),col+2,row+1);
-
-        int hours = Integer.parseInt(tasksList.get(i).getMeeting_hours().getText());
-        int mins = Integer.parseInt(tasksList.get(i).getMeeitng_minute().getText());
-        int sec = Integer.parseInt(tasksList.get(i).getMeeting_sec().getText());
-
-
-            tasksList.get(i).Select.setOnMouseClicked(new EventHandler<MouseEvent>() {
-           @Override
-           public void handle(MouseEvent mouseEvent) {
-               Time time = new Time();
-               TimerLayout tml = new TimerLayout();
-               tml.playpause.setDisable(false);
-               tml.startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-                   @Override
-                   public void handle(MouseEvent mouseEvent) {
-                       time.startTimer(hours,mins,sec);
-                   }
-               });
-
-           }
-       });
-                row+=2;
-    }
-        return Agendas;
 
     }
 
@@ -181,11 +175,17 @@ public class Meeting_Agenda_Layout {
     public boolean validateTime(TextField txt, String name) {
         try {
             int cnt = Integer.parseInt(txt.getText());
-
+            return true;
         }   catch (IllegalArgumentException e)
-        {return  false;
+
+        {
+            Alert a = new Alert(Alert.AlertType.WARNING, "Please Enters Numeric value only");
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.show();
+
+            return  false;
         }
-        return true;
+
     }
 
     public boolean validateAgenda(TextField txt, String name) {

@@ -56,13 +56,13 @@ public class Meeting_Agenda {
         return this.Select;
     }
 
-    public Meeting_Agenda(String meeting_name, String meeting_agenda, String meeting_sec, String meeting_hours, String meeitng_minute) {
+    public Meeting_Agenda(String meeting_agenda, String meeting_name, String meeting_hours, String meeitng_minute,String meeting_sec,Button select)   {
         this.meeting_agenda = new Text(meeting_agenda);
         this.taskname = new Text(meeting_name);
         this.meeting_hours = new Text(meeting_hours);
         this.meeitng_minute = new Text(meeitng_minute);
         this.meeting_sec = new Text(meeting_sec);
-        this.Select = new Button("Select");
+        this.Select =  select;
     }
 
    // https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
