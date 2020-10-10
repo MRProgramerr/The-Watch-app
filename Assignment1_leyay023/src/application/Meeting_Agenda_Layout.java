@@ -96,13 +96,10 @@ public class Meeting_Agenda_Layout {
         subtaskCol.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("taskname"));
         thrs.setMinWidth(20);
         thrs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_hours"));
-
         tmins.setMinWidth(20);
         tmins.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeitng_minute"));
-
         tsecs.setMinWidth(20);
         tsecs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_sec"));
-
         tselect.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,Button>("Select"));
 
 
@@ -148,7 +145,7 @@ public class Meeting_Agenda_Layout {
         add.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                    if((validateAgenda(meeting_agenda,"Agenda") && validateAgenda(taskname,"task") )|| validateTime(meeitng_minute, "minute") || validateTime(meeting_hours,"hours") || validateTime(meeting_sec,"secomd")) {
+                    if(validateAgenda(meeting_agenda,"Agenda") && validateAgenda(taskname,"task")  &&validateTime(meeitng_minute, "minute") && validateTime(meeting_hours,"hours") && validateTime(meeting_sec,"secomd")) {
                         tasksList.add(new Meeting_Agenda(meeting_agenda.getText(),taskname.getText(), meeting_hours.getText(),meeitng_minute.getText(),meeting_sec.getText(),new Button("Select")));
                         meeting_agenda.clear();
                         meeting_sec.clear();
@@ -157,31 +154,49 @@ public class Meeting_Agenda_Layout {
                         taskname.clear();
 
                     }
-                    else
-                    {
-                        Alert a = new Alert(Alert.AlertType.WARNING, "Please fill all the fields");
-                        a.setAlertType(Alert.AlertType.ERROR);
-                        a.show();
-                    }
+
                 }
 
         });
 
+        table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Meeting_Agenda>() {
+            @Override
+            public void onChanged(Change<? extends Meeting_Agenda> change) {
+                Time time = new Time();
+                for(Meeting_Agenda ma : change.getList()){
+                    int hours = Integer.parseInt(ma.getMeeting_hours().getText());
+                    int mins = Integer.parseInt(ma.getMeeitng_minute().getText());
+                    int sec = Integer.parseInt(ma.getMeeting_sec().getText());
 
 
+
+                    time.startTimer(hours,mins,sec);
+
+                }
+            }
+
+
+        });
     }
+
+
+    private void runtimer() {
+        //tml.playpause.setDisable(false);
+
+}
+
+
 
 
     public boolean validateTime(TextField txt, String name) {
         try {
             int cnt = Integer.parseInt(txt.getText());
             return true;
-        }   catch (IllegalArgumentException e)
-
-        {
+        }
+        catch (IllegalArgumentException e){
             Alert a = new Alert(Alert.AlertType.WARNING, "Please Enters Numeric value only");
             a.setAlertType(Alert.AlertType.ERROR);
-            a.show();
+            a.showAndWait();
 
             return  false;
         }
@@ -191,6 +206,9 @@ public class Meeting_Agenda_Layout {
     public boolean validateAgenda(TextField txt, String name) {
         if(txt.getText().compareTo("")==0){
 
+            Alert a = new Alert(Alert.AlertType.WARNING, "Please fill all the fields");
+            a.setAlertType(Alert.AlertType.ERROR);
+            a.showAndWait();
             return false;
         }
         else

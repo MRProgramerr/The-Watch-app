@@ -131,7 +131,7 @@ public class TimerLayout {
         playpause.getChildren().addAll(startButton,stopButton,terminateButton);
         playpause.setSpacing(20);
         playpause.setAlignment(Pos.CENTER);
-        playpause.setDisable(true);
+       // playpause.setDisable(true);
 
         //dots.setSpacing(5);
         Hours.setText("00");
