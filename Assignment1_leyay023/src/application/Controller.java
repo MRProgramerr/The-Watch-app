@@ -1,13 +1,17 @@
 package application;
 
+import com.opencsv.exceptions.CsvException;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class Controller {
 
@@ -16,6 +20,14 @@ public class Controller {
         Stage primaryStage = new Stage();
         StackPane p = new StackPane();
         BorderPane bp = new BorderPane();
+        HBox header = new HBox();
+
+        Button importcsv = new Button("Import");
+        Button exportcsv = new Button("Export");
+
+        header.getChildren().addAll(importcsv,exportcsv);
+        header.setSpacing(5);
+
         Meeting_Agenda_Layout mla = new Meeting_Agenda_Layout();
         // Background Image
         //
@@ -75,15 +87,30 @@ public class Controller {
             @Override
             public void handle(ActionEvent arg0) {
 
+                importcsv.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            mla.importCsv();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        } catch (CsvException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 bp.setCenter(tml.getTimelayout());
-                bp.setStyle("-fx-background-color:# ");
+                bp.setStyle("-fx-background-color:#000000 ");
                 bp.setRight(mla.getAgenda_vbox());
+                bp.setTop(header);
                 // MainScreen Focus
                 primaryStage.setScene(mainScene);
                 primaryStage.setMaximized(true);
                 primaryStage.show();
+
             }
         });
+
 
         p.getChildren().add(button1);
         scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());

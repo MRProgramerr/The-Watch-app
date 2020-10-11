@@ -1,6 +1,8 @@
 
 package application;
 
+import com.opencsv.CSVReader;
+import com.opencsv.exceptions.CsvException;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -13,7 +15,13 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Meeting_Agenda_Layout {
@@ -87,7 +95,6 @@ public class Meeting_Agenda_Layout {
         TableColumn thrs = new TableColumn("H");
         TableColumn tmins = new TableColumn("M");
         TableColumn tsecs = new TableColumn("S");
-        TableColumn tselect = new TableColumn("Select");
 
 
         agendaCol.setMinWidth(100);
@@ -100,14 +107,13 @@ public class Meeting_Agenda_Layout {
         tmins.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeitng_minute"));
         tsecs.setMinWidth(20);
         tsecs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_sec"));
-        tselect.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,Button>("Select"));
 
 
         // tselect.setMinWidth(20);
 
 
 
-        table.getColumns().addAll(agendaCol,subtaskCol,thrs,tmins,tsecs,tselect);
+        table.getColumns().addAll(agendaCol,subtaskCol,thrs,tmins,tsecs);
         table.setItems(tasksList);
 
 
@@ -146,7 +152,7 @@ public class Meeting_Agenda_Layout {
             @Override
             public void handle(MouseEvent mouseEvent) {
                     if(validateAgenda(meeting_agenda,"Agenda") && validateAgenda(taskname,"task")  &&validateTime(meeitng_minute, "minute") && validateTime(meeting_hours,"hours") && validateTime(meeting_sec,"secomd")) {
-                        tasksList.add(new Meeting_Agenda(meeting_agenda.getText(),taskname.getText(), meeting_hours.getText(),meeitng_minute.getText(),meeting_sec.getText(),new Button("Select")));
+                        tasksList.add(new Meeting_Agenda(meeting_agenda.getText(),taskname.getText(), meeting_hours.getText(),meeitng_minute.getText(),meeting_sec.getText()));
                         meeting_agenda.clear();
                         meeting_sec.clear();
                         meeting_hours.clear();
@@ -222,8 +228,32 @@ public class Meeting_Agenda_Layout {
 
         return (Double.toString(totalsec));
     }
+   //reference - https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
+    //reference - https://gist.github.com/MenaiAla/7768b89ba27c243cf6477cd9cfc58193
+    public  static void importCsv() throws IOException, CsvException {
+     try {
+         FileChooser chooser = new FileChooser();
+         chooser.setTitle("Open File");
+         File file = chooser.showOpenDialog(new Stage());
 
-    public void foot(){
+         FileReader fileReader = new FileReader(file.getAbsolutePath());
+         BufferedReader br = new BufferedReader(fileReader);
+
+         String record;
+         while ((record = br.readLine()) != null) {
+
+             String[]records = record.split(",");
+
+             tasksList.add(new Meeting_Agenda(records[0],records[1],records[2],records[3],records[4]));
+
+         }
+     }catch (Exception e){
+         e.printStackTrace();
+     }
+
+    }
+
+    public void head(){
 
     }
 

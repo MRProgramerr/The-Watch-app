@@ -1,8 +1,10 @@
 package application;
 
+
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.text.Text;
+
 
 public class Meeting_Agenda {
     private Text taskname;
@@ -10,7 +12,6 @@ public class Meeting_Agenda {
     private Text meeting_sec;
     private Text meeting_hours;
     private Text meeitng_minute;
-    public Button Select;
 
     public Text getTaskname() {
         return this.taskname;
@@ -52,18 +53,17 @@ public class Meeting_Agenda {
         this.meeitng_minute = meeitng_minute;
     }
 
-    public Button getSelect() {
-        return this.Select;
-    }
 
-    public Meeting_Agenda(String meeting_agenda, String meeting_name, String meeting_hours, String meeitng_minute,String meeting_sec,Button select)   {
+
+    public Meeting_Agenda(String meeting_agenda, String meeting_name, String meeting_hours, String meeitng_minute,String meeting_sec)   {
         this.meeting_agenda = new Text(meeting_agenda);
         this.taskname = new Text(meeting_name);
         this.meeting_hours = new Text(meeting_hours);
         this.meeitng_minute = new Text(meeitng_minute);
         this.meeting_sec = new Text(meeting_sec);
-        this.Select =  select;
     }
+
 
    // https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
 }
+
