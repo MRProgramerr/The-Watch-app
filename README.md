@@ -81,6 +81,12 @@ Do take note that Path-File is to be replaced with the path of your library for 
 
 **Step 4 : Running "Time Blocks"**
 ==================================
+If you were using IntelliJ IDE <br>
+- Press Shift + F10 on your keyboard to run the application. <br>
 
+If you were using Eclipse IDE <br>
+- Press Ctrl + Shift + X or Ctrl + Shift + J to run the application. <br>
 
+**Features**
+=============
 
