@@ -99,6 +99,17 @@ public class Controller {
                         }
                     }
                 });
+
+                exportcsv.setOnAction(new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle(ActionEvent event) {
+                        try {
+                            mla.exportCsv();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
                 bp.setCenter(tml.getTimelayout());
                 bp.setStyle("-fx-background-color:#000000 ");
                 bp.setRight(mla.getAgenda_vbox());

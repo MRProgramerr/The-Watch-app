@@ -18,10 +18,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class Meeting_Agenda_Layout {
@@ -228,11 +225,13 @@ public class Meeting_Agenda_Layout {
 
         return (Double.toString(totalsec));
     }
+
    //reference - https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
     //reference - https://gist.github.com/MenaiAla/7768b89ba27c243cf6477cd9cfc58193
     public  static void importCsv() throws IOException, CsvException {
      try {
          FileChooser chooser = new FileChooser();
+         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files(*.csv)","*.csv"));
          chooser.setTitle("Open File");
          File file = chooser.showOpenDialog(new Stage());
 
@@ -251,6 +250,26 @@ public class Meeting_Agenda_Layout {
          e.printStackTrace();
      }
 
+    }
+    public static void exportCsv() throws IOException {
+        Writer writer = null;
+        try{
+            File file = new File("Agendas.csv");
+
+            writer = new BufferedWriter(new FileWriter(file));
+
+            for(Meeting_Agenda agenda : tasksList){
+                String str = agenda.getMeeting_agenda().getText()+", "+agenda.getTaskname().getText()+", "+agenda.getMeeting_hours().getText()+", "+agenda.getMeeitng_minute().getText()+","+agenda.getMeeting_sec().getText()+"\n";
+                writer.write(str);
+            }
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+        finally {
+            writer.flush();
+            writer.close();
+        }
     }
 
     public void head(){
