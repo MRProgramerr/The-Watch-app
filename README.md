@@ -51,13 +51,19 @@ If you have an **IDE** installed, follow these steps instead:
 
 Below this are steps onto how you can import the  JavaFX Library that you have downloaded previously. <br>
 
-<h2> IntelliJ </h2>
-- File >> Project Structure >> Libraries under project settings >> + icon  >> Java <Br>
+<strong> IntelliJ </strong>
+- Click File, then Click Project Structure. After which you click Libraries under project settings where you click + icon and then click Java. <br>
 Altenatively you can access the Project Structure by pressing <strong>CTRL+ALT+SHIFT+S</strong>. <br>
-Following this you should have reached a dialog box with file chooser. You are now going to navigate to your JavaFX library folder. Choose the necessary modules required to run this application which should include <Strong>Time-Blocks</strong>, and then click OK which should close the dialog box. <br>
+- Following this, you are going to navigate to your JavaFX Library Folder in the file chooser. Choose the necessary modules that will be required to run this application which should include "Time Blocks". <br>
+- Once you are done, click OK which should close the dialog box. <br>
 
-If you are using a version of Java thats 11 or higher, you need to add JavaFX to your VM. To do this, you will need to go to Edit Configurations which is at Run, and then select application which leads to Main, where you will see a VM options box where you will type --module-path "<strong>Path_File</strong>" --add-modules javafx.controls, javafx.fxml and then apply and close the dialog box. <br>
-Do take note that Path_File is to be replaced with the path of your library for JavaFX. <br>
+> If you are using a version of Java that is 11 or higher <Br>
+
+- Navigate to your VM which is at Edit Configurations under Run. <br>
+- In the VM options box, type --module path "Path-File" --add-modules javafx.controls, javafx.fxml <br>
+Do take note that Path-File is to be replaced with the path of your library for JavaFX. <br>
+- Once you have done this, click apply and then close the dialog box. <br>
+
 <h2> Eclipse </h2>
 
 
