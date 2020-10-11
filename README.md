@@ -64,6 +64,23 @@ Altenatively you can access the Project Structure by pressing <strong>CTRL+ALT+S
 Do take note that Path-File is to be replaced with the path of your library for JavaFX. <br>
 - Once you have done this, click apply and then close the dialog box. <br>
 
-<h2> Eclipse </h2>
+<strong> Eclipse </strong>
+- Go to Project and then choose Properties and then click on Java Build Path and then choose Libraries.
+- Now go to the classpath folder and click Add Library, choose User Library from the options provided in the dialog box. If JavaFX was installed properly, it should show up when you have clicked next.
+- Select the checkbox for JavaFX.
+- Click Finish and that will close the dialog box. <br>
+> Now you need to add the external JARs that will be needed for the application to run. <br>
+
+
+- Navigate back to Java Build Path which is under Project and Properties, and choose Libraries again.
+- Click on JavaFX and expand the library. If no JARs are present you will need to do the following steps. 
+- Click on JavaFX and select add External JARs, once you do a dialog box will open and you will need to navigate to the library of where you downloaded your JavaFX at.
+- Select all of the .jar files in the /lib folder excluding the src zip or rar file. 
+- Click Apply and close the dialog box.
+> You should now be able to run the application. <br>
+
+**Step 4 : Running "Time Blocks"**
+==================================
+
 
 
