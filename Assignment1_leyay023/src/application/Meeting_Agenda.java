@@ -1,8 +1,6 @@
+
 package application;
 
-
-import javafx.scene.Node;
-import javafx.scene.control.Button;
 import javafx.scene.text.Text;
 
 
@@ -61,9 +59,6 @@ public class Meeting_Agenda {
         this.meeting_hours = new Text(meeting_hours);
         this.meeitng_minute = new Text(meeitng_minute);
         this.meeting_sec = new Text(meeting_sec);
+
     }
-
-
-   // https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
 }
-

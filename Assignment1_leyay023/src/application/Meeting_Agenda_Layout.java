@@ -38,33 +38,25 @@ public class Meeting_Agenda_Layout {
     private Label secLabel = new Label();
     private Label minLabel = new Label();
     private boolean check = true;
-    private static ObservableList<Meeting_Agenda> tasksList = FXCollections.observableArrayList();
-
-
+    public boolean added;
     private Button start;
     private Button restart;
     Button remove ;
-    private Button add ;
+    public Button add ;
+    TimerLayout timerLayout;
+    public int sec;
+    public int mins;
+    public int hours;
+    private static ObservableList<Meeting_Agenda> tasksList = FXCollections.observableArrayList();
+
 
 //    Time time = new Time();
 
-    public static VBox getAgenda_vbox() {
-        return Agenda_vbox;
-    }
-
-    public static void setAgenda_vbox(VBox agenda_vbox) {
-        Agenda_vbox = agenda_vbox;
-    }
-
-    public static VBox getAgendas() {
-        return Agendas;
-    }
-
-    public static void setAgendas(VBox agendas) {
-        Agendas = agendas;
-    }
 
     public Meeting_Agenda_Layout() {
+
+        timerLayout = new TimerLayout();
+
         remove =  new Button("X");
         meeting_agenda.setPromptText("Agenda");
         meeting_agenda.setPrefWidth(100.0D);
@@ -78,7 +70,7 @@ public class Meeting_Agenda_Layout {
         meeting_hours.setPromptText("00");
         meeting_hours.setPrefWidth(30.0D);
         add = new Button("Add");
-
+        added = false;
         hoursLabel.setText("H");
         minLabel.setText("Min");
         secLabel.setText("Sec");
@@ -137,45 +129,49 @@ public class Meeting_Agenda_Layout {
         Agenda_Pane.add(add,8,1);
 
         Agenda_Pane.setPadding(new Insets(10.0D, 10.0D, 10.0D, 10.0D));
-
         Agenda_vbox.getChildren().addAll(agendaLabel,meeting_agenda, Agenda_Pane,table);
         Agenda_vbox.setPadding(new Insets(20.0D, 20.0D, 20.0D, 10.0D));
 
 
         //Agendas.setBackground(new Background(new BackgroundFill(Color.CHOCOLATE,null,null)));
 
-        if(tasksList.size()==0 && check == true)
-        add.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
+        if(tasksList.size()==0)
+            add.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent mouseEvent) {
+
                     if(validateAgenda(meeting_agenda,"Agenda") && validateAgenda(taskname,"task")  &&validateTime(meeitng_minute, "minute") && validateTime(meeting_hours,"hours") && validateTime(meeting_sec,"secomd")) {
+
                         tasksList.add(new Meeting_Agenda(meeting_agenda.getText(),taskname.getText(), meeting_hours.getText(),meeitng_minute.getText(),meeting_sec.getText()));
                         meeting_agenda.clear();
                         meeting_sec.clear();
                         meeting_hours.clear();
                         meeitng_minute.clear();
                         taskname.clear();
+                        timerLayout.getStartButton().setDisable(false);
 
                     }
 
                 }
 
-        });
+            });
 
         table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Meeting_Agenda>() {
             @Override
             public void onChanged(Change<? extends Meeting_Agenda> change) {
-                TimerLayout tml = new TimerLayout();
                 for(Meeting_Agenda ma : change.getList()){
-                    int hours = Integer.parseInt(ma.getMeeting_hours().getText());
-                    int mins = Integer.parseInt(ma.getMeeitng_minute().getText());
-                    int sec = Integer.parseInt(ma.getMeeting_sec().getText());
+                    timerLayout.times.clear();
+                    hours = Integer.parseInt(ma.getMeeting_hours().getText());
+                    mins = Integer.parseInt(ma.getMeeitng_minute().getText());
+                    sec = Integer.parseInt(ma.getMeeting_sec().getText());
 
-                   tml.startTimer(hours,mins,sec);
+                    timerLayout.times.add(new Timer(hours,mins,sec));
+//                    getTimerLayout().setHours(hours);
+//                    getTimerLayout().setMins(mins);
+//                    getTimerLayout().setSecs(sec);
                 }
+
             }
-
-
         });
     }
 
@@ -183,7 +179,7 @@ public class Meeting_Agenda_Layout {
     private void runtimer() {
         //tml.playpause.setDisable(false);
 
-}
+    }
 
 
 
@@ -226,32 +222,32 @@ public class Meeting_Agenda_Layout {
         return (Double.toString(totalsec));
     }
 
-   //reference - https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
+    //reference - https://www.gemboxsoftware.com/spreadsheet-java/examples/javafx-import-export-excel-tableview/5301
     //reference - https://gist.github.com/MenaiAla/7768b89ba27c243cf6477cd9cfc58193
     public  static void importCsv() throws IOException, CsvException {
-     try {
-         FileChooser chooser = new FileChooser();
-         chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files(*.csv)","*.csv"));
-         chooser.setTitle("Open File");
-         File file = chooser.showOpenDialog(new Stage());
+        try {
+            FileChooser chooser = new FileChooser();
+            chooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("CSV files(*.csv)","*.csv"));
+            chooser.setTitle("Open File");
+            File file = chooser.showOpenDialog(new Stage());
 
-         FileReader fileReader = new FileReader(file.getAbsolutePath());
-         BufferedReader br = new BufferedReader(fileReader);
+            FileReader fileReader = new FileReader(file.getAbsolutePath());
+            BufferedReader br = new BufferedReader(fileReader);
 
-         String record;
-         while ((record = br.readLine()) != null) {
+            String record;
+            while ((record = br.readLine()) != null) {
 
-             String[]records = record.split(",");
+                String[]records = record.split(",");
 
-             tasksList.add(new Meeting_Agenda(records[0],records[1],records[2],records[3],records[4]));
+                tasksList.add(new Meeting_Agenda(records[0],records[1],records[2],records[3],records[4]));
 
-         }
-     }catch (Exception e){
-         e.printStackTrace();
-     }
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
-   //Reference https://www.eehelp.com/question/javafx2-1-tableview-a-tableview-content-can-be-exported-to-excel/
+    //Reference https://www.eehelp.com/question/javafx2-1-tableview-a-tableview-content-can-be-exported-to-excel/
     public static void exportCsv() throws IOException {
 
         Writer writer = null;
@@ -277,5 +273,29 @@ public class Meeting_Agenda_Layout {
     public void head(){
 
     }
+    public static VBox getAgenda_vbox() {
+        return Agenda_vbox;
+    }
+
+    public static void setAgenda_vbox(VBox agenda_vbox) {
+        Agenda_vbox = agenda_vbox;
+    }
+
+    public static VBox getAgendas() {
+        return Agendas;
+    }
+
+    public static void setAgendas(VBox agendas) {
+        Agendas = agendas;
+    }
+
+    public boolean isAdded() {
+        return added;
+    }
+
+    public void setAdded(boolean added) {
+        this.added = added;
+    }
+
 
 }

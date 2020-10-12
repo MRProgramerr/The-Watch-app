@@ -20,12 +20,23 @@ import java.io.IOException;
 public class Controller {
 
     public Controller(double x, double y) {
+
+        Meeting_Agenda_Layout mla = new Meeting_Agenda_Layout();
         TimerLayout tml = new TimerLayout();
+
         Stage primaryStage = new Stage();
+
         StackPane p = new StackPane();
         BorderPane bp = new BorderPane();
+
         HBox header = new HBox();
 
+        mla.add.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                tml.getStartButton().setDisable(false);
+            }
+        });
         Button importcsv = new Button("Import");
         Button exportcsv = new Button("Export");
 
@@ -36,7 +47,7 @@ public class Controller {
         header.getChildren().addAll(importcsv,exportcsv,colorPicker);
         header.setSpacing(5);
 
-        Meeting_Agenda_Layout mla = new Meeting_Agenda_Layout();
+
         // Background Image
         //
         p.setStyle(
@@ -118,4 +129,3 @@ public class Controller {
     }
 
 }
-
