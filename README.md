@@ -113,11 +113,13 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - To **_terminate_** the timer user click on the <strong>TERIMINATE<strong> button
 ![](./images/filename.jpg)
 
-**3. import and export CSV file**
+**3. import CSV file**
 ==========================================================
 - To _**import**_ the CSV <mark>select -> import<mark>
   - a new window will open -> select your .CSV file 
   - ![](./images/impoerCSV.jpg)
 
+**4. Export CSV file**
+==========================================================
 - To export a CSV file add your tasks -> export, and your files will be exported to the root directory
-  - ![](./images/CSVselect.jpg)
+  - ![](./images/CSV select.jpg)
