@@ -22,9 +22,8 @@ How to Run?
 - **JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
 - **JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
 - An Integrated Development Environment (**IDE**) is required to interact and run this application. - The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
-
-- - IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
-- - Eclipse - [https://www.eclipse.org/downloads/](url) <br>
+  - IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
+  - Eclipse - [https://www.eclipse.org/downloads/](url) <br>
 - A terminal or a command line is also needed to clone the repository available for this application. If you are using Windows, Command Prompt can be used for this purpose. If you are using Mac or Linux, you can open your Terminal. <br>
 
 
