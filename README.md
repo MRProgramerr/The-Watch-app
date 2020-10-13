@@ -16,15 +16,15 @@ How to Run?
 
 **Pre-Requisites**
 
-SSH / HTTPS Git Key - Found in **My Projects** in your account, if you were granted access by the developer.
-<br>**Java JDK** as well as **JavaFX** present on your computer.
-If you have not installed Java JDK or JavaFX, the links to download them are provided below: <br>
-**JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
-**JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
-An Integrated Development Environment (**IDE**) is required to interact and run this application. The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
-IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
-Eclipse - [https://www.eclipse.org/downloads/](url) <br>
-A terminal or a command line is also needed to clone the repository available for this application. If you are using Windows, Command Prompt can be used for this purpose. If you are using Mac or Linux, you can open your Terminal. <br>
+- SSH / HTTPS Git Key - Found in **My Projects** in your account, if you were granted access by the developer.
+<br> - **Java JDK** as well as **JavaFX** present on your computer.
+- If you have not installed Java JDK or JavaFX, the links to download them are provided below: <br>
+- **JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
+- **JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
+- An Integrated Development Environment (**IDE**) is required to interact and run this application. - The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
+- IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
+- Eclipse - [https://www.eclipse.org/downloads/](url) <br>
+- A terminal or a command line is also needed to clone the repository available for this application. If you are using Windows, Command Prompt can be used for this purpose. If you are using Mac or Linux, you can open your Terminal. <br>
 
 
 **Step 1 : Cloning repository**
