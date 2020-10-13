@@ -22,14 +22,6 @@ import java.util.ArrayList;
 
 public class TimerLayout {
 
-    public Integer getSTARTTIME() {
-        return STARTTIME;
-    }
-
-    public void setSTARTTIME(Integer STARTTIME) {
-        this.STARTTIME = STARTTIME;
-    }
-
     private Integer STARTTIME =0 ;
     private Label SecondsLabel;
     private Label MinutesLabel;
@@ -116,7 +108,6 @@ public class TimerLayout {
         stopButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-//                timeline.pause();
                 timeline.stop();
                 startButton.setDisable(false);
                 pressed = true;
@@ -127,7 +118,9 @@ public class TimerLayout {
         terminateButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
+
                 timeline.stop();
+                pressed=true;
                 stopButton.setDisable(true);
                 terminateButton.setDisable(true);
                 SecondsLabel.setText(String.format("%02d",00));
@@ -145,7 +138,7 @@ public class TimerLayout {
                 STARTTIMEsec = times.get(0).getSecs();
                 STARTTIMEmins = times.get(0).getMinutes();
                 STARTTIMEhours = times.get(0).getHours();
-                if(pressed == false)
+
                 STARTTIME = STARTTIMEhours*3600 + STARTTIMEmins*60 + STARTTIMEsec;
 
                 KeyFrame keyFrame = new KeyFrame(
@@ -162,7 +155,7 @@ public class TimerLayout {
                         HoursLabel.setText(String.format("%02d",(STARTTIMEhours)));
 
                         STARTTIME--;
- //
+
                         if(STARTTIMEsec ==0 && STARTTIMEhours ==0&& STARTTIMEmins==0) {
                             timeline.stop();
                         }
@@ -221,29 +214,7 @@ public class TimerLayout {
         return button;
     }
 
-    public Label getSecondsLabel() {
-        return SecondsLabel;
-    }
 
-    public void setSecondsLabel(Label secondsLabel) {
-        SecondsLabel = secondsLabel;
-    }
-
-    public Label getMinutesLabel() {
-        return MinutesLabel;
-    }
-
-    public void setMinutesLabel(Label minutesLabel) {
-        MinutesLabel = minutesLabel;
-    }
-
-    public Label getHoursLabel() {
-        return HoursLabel;
-    }
-
-    public void setHoursLabel(Label hoursLabel) {
-        HoursLabel = hoursLabel;
-    }
     public Button getStartButton() {
         return startButton;
     }

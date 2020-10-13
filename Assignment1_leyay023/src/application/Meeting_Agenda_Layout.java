@@ -8,6 +8,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
@@ -44,14 +45,12 @@ public class Meeting_Agenda_Layout {
     private Button restart;
     Button remove ;
     public Button add ;
+    public Button delete;
     TimerLayout timerLayout;
     public int sec;
     public int mins;
     public int hours;
     private static ObservableList<Meeting_Agenda> tasksList = FXCollections.observableArrayList();
-
-
-//    Time time = new Time();
 
 
     public Meeting_Agenda_Layout() {
@@ -71,6 +70,7 @@ public class Meeting_Agenda_Layout {
         meeting_hours.setPromptText("00");
         meeting_hours.setPrefWidth(30.0D);
         add = new Button("Add");
+        delete = new Button("Delete");
         added = false;
 
         hoursLabel.setText("H");
@@ -104,9 +104,6 @@ public class Meeting_Agenda_Layout {
         tsecs.setCellValueFactory(new PropertyValueFactory<Meeting_Agenda,String>("meeting_sec"));
 
 
-        // tselect.setMinWidth(20);
-
-
 
         table.getColumns().addAll(agendaCol,subtaskCol,thrs,tmins,tsecs);
         table.setItems(tasksList);
@@ -132,13 +129,13 @@ public class Meeting_Agenda_Layout {
         Agenda_Pane.add(add,8,1);
 
         Agenda_Pane.setPadding(new Insets(10.0D, 10.0D, 10.0D, 10.0D));
-        Agenda_vbox.getChildren().addAll(agendaLabel,meeting_agenda, Agenda_Pane,table);
+        Agenda_vbox.getChildren().addAll(agendaLabel,meeting_agenda, Agenda_Pane,table,delete);
         Agenda_vbox.setPadding(new Insets(20.0D, 20.0D, 20.0D, 10.0D));
 
+        if(tasksList.size()==0){
+            delete.setDisable(true);
+        }
 
-        //Agendas.setBackground(new Background(new BackgroundFill(Color.CHOCOLATE,null,null)));
-
-        if(tasksList.size()==0)
             add.setOnMouseClicked(new EventHandler<MouseEvent>() {
                 @Override
                 public void handle(MouseEvent mouseEvent) {
@@ -152,12 +149,38 @@ public class Meeting_Agenda_Layout {
                         meeitng_minute.clear();
                         taskname.clear();
                         timerLayout.getStartButton().setDisable(false);
+                        delete.setDisable(false);
 
                     }
 
                 }
 
             });
+
+        delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+
+                int i = table.getSelectionModel().getSelectedIndex();
+                Meeting_Agenda meeting_agenda = (Meeting_Agenda) table.getSelectionModel().getSelectedItem();
+                tasksList.remove(i);
+                Alert a = new Alert(Alert.AlertType.WARNING, "Task Deleted");
+                a.setAlertType(Alert.AlertType.INFORMATION);
+                a.showAndWait();
+
+                if(tasksList.size()==0)
+                    delete.setDisable(true);
+
+                if(i != 0){
+                    i = i-1;
+                }
+                table.requestFocus();
+                table.getSelectionModel().select(i);
+                table.getFocusModel().focus(i);
+            }
+
+
+        });
 
         table.getSelectionModel().getSelectedItems().addListener(new ListChangeListener<Meeting_Agenda>() {
             @Override
@@ -262,31 +285,12 @@ public class Meeting_Agenda_Layout {
         }
     }
 
-    public void head(){
-
-    }
     public static VBox getAgenda_vbox() {
         return Agenda_vbox;
     }
 
     public static void setAgenda_vbox(VBox agenda_vbox) {
         Agenda_vbox = agenda_vbox;
-    }
-
-    public static VBox getAgendas() {
-        return Agendas;
-    }
-
-    public static void setAgendas(VBox agendas) {
-        Agendas = agendas;
-    }
-
-    public boolean isAdded() {
-        return added;
-    }
-
-    public void setAdded(boolean added) {
-        this.added = added;
     }
 
 
