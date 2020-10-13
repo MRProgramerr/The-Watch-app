@@ -163,7 +163,14 @@ public class TimerLayout {
                         if(STARTTIMEsec ==0 && STARTTIMEhours ==0&& STARTTIMEmins==0) {
                             timeline.stop();
                         }
-
+                        if(STARTTIME==9){
+                            FadeTransition transition = new FadeTransition(Duration.seconds(1));
+                            transition.setNode(timelayout);
+                            transition.setFromValue(0.2);
+                            transition.setToValue(10);
+                            transition.setCycleCount(11);
+                            transition.play();
+                        }
 
                     }
                 }
