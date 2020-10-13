@@ -109,8 +109,7 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
  **2. Delete a task**
 ==========================================================
 - User can  <mark>**select -> tasks -> delete**<mark> button to delete a task
-- On successfull deletion a message is dipslayed
-![](./images/deletefile.jpg =80x)
+- On successfull deletion **message is dipslayed**
 ![](./images/deltemessage.jpg)
 
  **3. Run the Timer**
