@@ -106,7 +106,14 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - After providing all the details <mark>select-><strong>add<strong><mark> button your Agenda, task and time limit will be added to the list
   ![](./images/add.jpg)
 
- **2. Run the Timer**
+ **2. Delete a task**
+==========================================================
+- User can  <mark>**select -> tasks -> delete**<mark> button to delete a task
+- On successfull deletion a message is dipslayed
+![](./images/deltefile.jpg)
+![](./images/deletemessage.jpg)
+
+ **3. Run the Timer**
 ==========================================================
 - To **_run_** the **timer** user has to select a task fromt the tasklist, then the play button will be enabled
 - <mark>select-><strong>PLAY<strong><mark> button to **start** the timer.
@@ -114,19 +121,19 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - To **_terminate_** the timer user can <mark>select-><strong>TERIMINATE<strong><mark> button
   ![](./images/filename.jpg)
 
-**3. import CSV file**
+**4. import CSV file**
 ==========================================================
 - To _**import**_ the CSV <mark>select->import<mark>
 - a new window will open <mark>select-> your .CSV file<mark>
  ![](./images/impoerCSV.jpg)
  ![](./images/CSVselect.jpg)
 
-**4. Export CSV file**
+**5. Export CSV file**
 ==========================================================
 - To export a CSV file add your tasks <mark>Select->export<mark>.
  ![](./images/exportCSV.jpg)
 
-**4. Set background color**
+**6. Set background color**
 ==========================================================
 - User can set a background color of their chocie by: <mark>Select->Color<mark>
  ![](./images/colorpicker.jpg)
