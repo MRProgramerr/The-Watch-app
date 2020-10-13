@@ -92,11 +92,11 @@ Do take note that Path-File is to be replaced with the path of your library for 
 =====================================
 The **Time-Blocks** application is easy to use, user friendly and comes loaded with a lot of exciting features:
 - The app has a _**Countdown timer**_ in hours. minutes and seconds.
-- The app allows you to_** create Agenda**_ and _**assign a subtask**_ with a_** time limit**_ to it.
-- User Can_** import and export**_ <strong>.CSV<strong> files to add your tasks to the app.
+- The app allows you to _**create Agenda**_ and _**assign a subtask**_ with a _** time limit**_ to it.
+- User Can _**import and export**_ <strong>.CSV<strong> files to add your tasks to the app.
 - User can also set a _**background color**_ of your choice.
 - The app has the following _**inbuilt alerts**_
-  -**In the last 10 seconds the timer starts to fade**
-  -**In the last 10 seconds the timer plays a Countdown sound **
-  -**When the timer is finished it plays an alert sound**
+  - **In the last 10 seconds the timer starts to fade**
+  - **In the last 10 seconds the timer plays a Countdown sound **
+  - **When the timer is finished it plays an alert sound**
    
