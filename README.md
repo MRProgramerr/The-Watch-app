@@ -104,6 +104,7 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 ==========================================================
 - User can enter the **Agend**, **task** and **time limit** in the _text fields_ localted on the **right section** of the app
 - After providing all the details **click** on <strong>add<strong> button your Agenda, task and time limit will be added to the list
+![](./images/add.jpg)
 
  **2. Run the Timer**
 ==========================================================
@@ -111,3 +112,11 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - The timer starts the count down, user can **_stop_** the timer by clicking on the <strong>STOP<strong> button
 - To **_terminate_** the timer user click on the <strong>TERIMINATE<strong> button
 ![](./images/filename.jpg)
+
+**3. import and export CSV file**
+==========================================================
+- To import the CSV select -> import
+  - a new window will open -> select your .CSV file 
+  -![](./images/impoerCSV.jpg)
+- To export a CSV file add your tasks -> export, and your files will be exported to the root directory
+  -![](./images/CSV select.jpg)
