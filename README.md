@@ -97,28 +97,29 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - User can also set a _**background color**_ of your choice.
 - The app has the following _**inbuilt alerts**_
   - **In the last 10 seconds the timer starts to fade**
-  - **In the last 10 seconds the timer plays a Countdown sound **
+  - **In the last 10 seconds the timer plays a Countdown sound**
   - **When the timer is finished it plays an alert sound**
 
  **1. Create an  _Agenda_ and _assign a subtask_ with a _time limit_**
 ==========================================================
 - User can enter the **Agend**, **task** and **time limit** in the **_text fields_** localted on the **right section** of the app
-- After providing all the details **click** on <strong>add<strong> button your Agenda, task and time limit will be added to the list
-![](./images/add.jpg)
+- After providing all the details <mark>select-><strong>add<strong><mark> button your Agenda, task and time limit will be added to the list
+  ![](./images/add.jpg)
 
  **2. Run the Timer**
 ==========================================================
 - To **_run_** the **timer** user has to select a task fromt the tasklist, then the play button will be enabled
-- <mark>select-> <strong>PLAY<strong><mark> button to **start** the timer.
+- <mark>select-><strong>PLAY<strong><mark> button to **start** the timer.
 - The timer starts the count down, user can **_stop_** the timer by <mark>select-> <strong>STOP<strong><mark> button
-- To **_terminate_** the timer user click on the <strong>TERIMINATE<strong> button
-![](./images/filename.jpg)
+- To **_terminate_** the timer user can <mark>select-><strong>TERIMINATE<strong><mark> button
+  ![](./images/filename.jpg)
 
 **3. import CSV file**
 ==========================================================
-- To _**import**_ the CSV <mark>select -> import<mark>
-  - a new window will open <mark>select-> your .CSV file<mark>
- ![](./images/impoerCSV.jpg)![](./images/CSVselect.jpg)
+- To _**import**_ the CSV <mark>select->import<mark>
+- a new window will open <mark>select-> your .CSV file<mark>
+ ![](./images/impoerCSV.jpg)
+ ![](./images/CSVselect.jpg)
 
 **4. Export CSV file**
 ==========================================================
