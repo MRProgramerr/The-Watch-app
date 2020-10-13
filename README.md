@@ -117,10 +117,15 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 ==========================================================
 - To _**import**_ the CSV <mark>select -> import<mark>
   - a new window will open <mark>select-> your .CSV file<mark>
-  - ![](./images/impoerCSV.jpg)
-  - ![](./images/CSV_select.jpg)
+   ![](./images/impoerCSV.jpg)
+   ![](./images/CSV_select.jpg)
 
 **4. Export CSV file**
 ==========================================================
 - To export a CSV file add your tasks <mark>Select-> export<mark>, and your files will be exported to the root directory
-  
+
+**4. Set background color**
+==========================================================
+- User can set a background color of their chocie by: <mark>Select->Color<mark>
+ ![](./images/colorpicker.jpg)
+
