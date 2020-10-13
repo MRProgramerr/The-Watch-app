@@ -19,8 +19,8 @@ How to Run?
 - SSH / HTTPS Git Key - Found in **My Projects** in your account, if you were granted access by the developer.
 <br> - **Java JDK** as well as **JavaFX** present on your computer.
 - If you have not installed Java JDK or JavaFX, the links to download them are provided below: <br>
-- **JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
-- **JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
+  - **JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
+  - **JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
 - An Integrated Development Environment (**IDE**) is required to interact and run this application. - The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
   - IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
   - Eclipse - [https://www.eclipse.org/downloads/](url) <br>
@@ -81,12 +81,22 @@ Do take note that Path-File is to be replaced with the path of your library for 
 
 **Step 4 : Running "Time Blocks"**
 ==================================
-If you were using IntelliJ IDE <br>
-- Press Shift + F10 on your keyboard to run the application. <br>
 
-If you were using Eclipse IDE <br>
-- Press Ctrl + Shift + X or Ctrl + Shift + J to run the application. <br>
+- In IntelliJ IDE <br>
+  Press Shift + F10 on your keyboard to run the application. <br>
 
-**Features**
-=============
+- In Eclipse IDE <br>
+ Press Ctrl + Shift + X or Ctrl + Shift + J to run the application. <br>
 
+**HOW TO USE THE APP**
+=====================================
+The **Time-Blocks** application is easy to use, user friendly and comes loaded with a lot of exciting features:
+- The app has a _**Countdown timer**_ in hours. minutes and seconds.
+- The app allows you to_** create Agenda**_ and _**assign a subtask**_ with a_** time limit**_ to it.
+- User Can_** import and export**_ <strong>.CSV<strong> files to add your tasks to the app.
+- User can also set a _**background color**_ of your choice.
+- The app has the following _**inbuilt alerts**_
+  -**In the last 10 seconds the timer starts to fade**
+  -**In the last 10 seconds the timer plays a Countdown sound **
+  -**When the timer is finished it plays an alert sound**
+   
