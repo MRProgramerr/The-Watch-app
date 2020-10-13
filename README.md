@@ -102,7 +102,7 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 
  **1. Create an  _Agenda_ and _assign a subtask_ with a _time limit_**
 ==========================================================
-- User can enter the **Agend**,** task** and **time limit** in the _text fields_ localted on the **right section** of the app
+- User can enter the **Agend**, **task** and **time limit** in the _text fields_ localted on the **right section** of the app
 - After providing all the details **click** on <strong>add<strong> button your Agenda, task and time limit will be added to the list
 
  **2. Run the Timer**
@@ -110,4 +110,4 @@ The **Time-Blocks** application is easy to use, user friendly and comes loaded w
 - To **_run_** the **timer** user has to select a task fromt the tasklist and click on the <strong>PLAY<strong>button.
 - The timer starts the count down, user can **_stop_** the timer by clicking on the <strong>STOP<strong> button
 - To **_terminate_** the timer user click on the <strong>TERIMINATE<strong> button
-
+![](./images/filename.jpg)
