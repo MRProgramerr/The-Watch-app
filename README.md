@@ -16,15 +16,15 @@ How to Run?
 
 **Pre-Requisites**
 
-SSH / HTTPS Git Key - Found in **My Projects** in your account, if you were granted access by the developer.
-<br>**Java JDK** as well as **JavaFX** present on your computer.
-If you have not installed Java JDK or JavaFX, the links to download them are provided below: <br>
-**JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
-**JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
-An Integrated Development Environment (**IDE**) is required to interact and run this application. The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
-IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
-Eclipse - [https://www.eclipse.org/downloads/](url) <br>
-A terminal or a command line is also needed to clone the repository available for this application. If you are using Windows, Command Prompt can be used for this purpose. If you are using Mac or Linux, you can open your Terminal. <br>
+- SSH / HTTPS Git Key - Found in **My Projects** in your account, if you were granted access by the developer.
+<br> - **Java JDK** as well as **JavaFX** present on your computer.
+- If you have not installed Java JDK or JavaFX, the links to download them are provided below: <br>
+  - **JDK** [https://www.oracle.com/java/technologies/javase-downloads.html](url) <br>
+  - **JavaFX** [https://gluonhq.com/products/javafx/](url) <br>
+- An Integrated Development Environment (**IDE**) is required to interact and run this application. - The preferred **IDE**(s) are IntelliJ and Eclipse. Both of these **IDE**s are free to download and use. The links to download them are below: <br>
+  - IntelliJ - [https://www.jetbrains.com/de-de/idea/download/](url) <br>
+  - Eclipse - [https://www.eclipse.org/downloads/](url) <br>
+- A terminal or a command line is also needed to clone the repository available for this application. If you are using Windows, Command Prompt can be used for this purpose. If you are using Mac or Linux, you can open your Terminal. <br>
 
 
 **Step 1 : Cloning repository**
@@ -81,12 +81,33 @@ Do take note that Path-File is to be replaced with the path of your library for 
 
 **Step 4 : Running "Time Blocks"**
 ==================================
-If you were using IntelliJ IDE <br>
-- Press Shift + F10 on your keyboard to run the application. <br>
 
-If you were using Eclipse IDE <br>
-- Press Ctrl + Shift + X or Ctrl + Shift + J to run the application. <br>
+- In IntelliJ IDE <br>
+  Press Shift + F10 on your keyboard to run the application. <br>
 
-**Features**
-=============
+- In Eclipse IDE <br>
+ Press Ctrl + Shift + X or Ctrl + Shift + J to run the application. <br>
+
+**HOW TO USE THE APP**
+=====================================
+The **Time-Blocks** application is easy to use, user friendly and comes loaded with a lot of exciting features:
+- The app has a _**Countdown timer**_ in hours. minutes and seconds.
+- The app allows you to _**create Agenda**_ and _**assign a subtask**_ with a _**time limit**_ to it.
+- User Can _**import and export**_ <strong>.CSV<strong> files to add your tasks to the app.
+- User can also set a _**background color**_ of your choice.
+- The app has the following _**inbuilt alerts**_
+  - **In the last 10 seconds the timer starts to fade**
+  - **In the last 10 seconds the timer plays a Countdown sound **
+  - **When the timer is finished it plays an alert sound**
+
+ **1. Create an  _Agenda_ and _assign a subtask_ with a _time limit_**
+==========================================================
+- User can enter the **Agend**,** task** and **time limit** in the _text fields_ localted on the **right section** of the app
+- After providing all the details **click** on <strong>add<strong> button your Agenda, task and time limit will be added to the list
+
+ **2. Run the Timer**
+==========================================================
+- To **_run_** the **timer** user has to select a task fromt the tasklist and click on the <strong>PLAY<strong>button.
+- The timer starts the count down, user can **_stop_** the timer by clicking on the <strong>STOP<strong> button
+- To **_terminate_** the timer user click on the <strong>TERIMINATE<strong> button
 
