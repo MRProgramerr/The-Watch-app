@@ -11,9 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.text.*;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.util.ArrayList;
 
 
@@ -164,6 +167,7 @@ public class TimerLayout {
                             timeline.stop();
                         }
                         if(STARTTIME==9){
+                            play();
                             FadeTransition transition = new FadeTransition(Duration.seconds(1));
                             transition.setNode(timelayout);
                             transition.setFromValue(0.2);
@@ -171,6 +175,8 @@ public class TimerLayout {
                             transition.setCycleCount(11);
                             transition.play();
                         }
+                        if(STARTTIME == -1)
+                            playalarm();
 
                     }
                 }
@@ -183,7 +189,6 @@ public class TimerLayout {
 //                System.out.println(keyFrame.toString());
                 if(timeline!=null){
                     timeline.stop();
-
                 }
                 timeline.playFromStart();
 
@@ -254,6 +259,16 @@ public class TimerLayout {
     public void setTimelayout(VBox timelayout) {
         this.timelayout = timelayout;
     }
-
-
+public  void play(){
+    Media media = new Media(new File("countdown.mp3").toURI().toString());
+    MediaPlayer mediaPlayer = new MediaPlayer(media);
+    mediaPlayer.setAutoPlay(true);
+    mediaPlayer.setStopTime(Duration.seconds(100));
+    }
+public  void playalarm(){
+        Media media = new Media(new File("alarm.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setAutoPlay(true);
+        mediaPlayer.setStopTime(Duration.seconds(30));
+    }
 }
