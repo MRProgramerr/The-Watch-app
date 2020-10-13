@@ -14,6 +14,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -62,7 +63,7 @@ public class Meeting_Agenda_Layout {
         meeting_agenda.setPrefWidth(100.0D);
         meeting_agenda.setPrefHeight(30.0D);
         taskname.setPromptText("Task");
-        taskname.setPrefWidth(100.0D);
+        taskname.setPrefWidth(300.0D);
         meeting_sec.setPromptText("00");
         meeting_sec.setPrefWidth(30.0D);
         meeitng_minute.setPromptText("00");
@@ -71,12 +72,17 @@ public class Meeting_Agenda_Layout {
         meeting_hours.setPrefWidth(30.0D);
         add = new Button("Add");
         added = false;
-        hoursLabel.setText("H");
-        minLabel.setText("Min");
-        secLabel.setText("Sec");
-        agendaLabel.setText("Agenda");
-        taskLabel.setText("Task");
 
+        hoursLabel.setText("H");
+        hoursLabel.setTextFill(Color.WHITE);
+        minLabel.setText("Min");
+        minLabel.setTextFill(Color.WHITE);
+        secLabel.setText("Sec");
+        secLabel.setTextFill(Color.WHITE);
+        agendaLabel.setText("Agenda");
+        agendaLabel.setTextFill(Color.WHITE);
+        taskLabel.setText("Task");
+        taskLabel.setTextFill(Color.WHITE);
         table.setEditable(true);
 
         TableColumn agendaCol = new TableColumn("Agendas");
@@ -108,9 +114,6 @@ public class Meeting_Agenda_Layout {
 
         Agendas.setPadding(new Insets(10,10,10,10));
         Agendas.getChildren().add(table);
-        Agendas.setStyle("-fx-background-color: chocolate;-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, " +
-                "0, 0); ");
-
         Agenda_Pane.add(taskLabel,0,0);
         Agenda_Pane.add(new Text("     "),1,0);
         Agenda_Pane.add(hoursLabel,2,0);
@@ -166,22 +169,11 @@ public class Meeting_Agenda_Layout {
                     sec = Integer.parseInt(ma.getMeeting_sec().getText());
 
                     timerLayout.times.add(new Timer(hours,mins,sec));
-//                    getTimerLayout().setHours(hours);
-//                    getTimerLayout().setMins(mins);
-//                    getTimerLayout().setSecs(sec);
-                }
+            }
 
             }
         });
     }
-
-
-    private void runtimer() {
-        //tml.playpause.setDisable(false);
-
-    }
-
-
 
 
     public boolean validateTime(TextField txt, String name) {
