@@ -1,6 +1,8 @@
 package application;
 
 import com.opencsv.exceptions.CsvException;
+import javafx.animation.FadeTransition;
+import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -13,6 +15,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.awt.*;
 import java.io.IOException;
@@ -111,6 +114,8 @@ public class Controller {
                 bp.setStyle("-fx-background-color:#000000 ");
                 bp.setRight(mla.getAgenda_vbox());
                 bp.setTop(header);
+
+
                 // MainScreen Focus
                 primaryStage.setScene(mainScene);
                 primaryStage.setMaximized(true);

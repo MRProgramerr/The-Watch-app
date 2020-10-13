@@ -1,10 +1,8 @@
 package application;
 
+import javafx.animation.FadeTransition;
 import javafx.animation.KeyFrame;
-import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
-import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -21,7 +19,15 @@ import java.util.ArrayList;
 
 public class TimerLayout {
 
-    private Integer STARTTIME ;
+    public Integer getSTARTTIME() {
+        return STARTTIME;
+    }
+
+    public void setSTARTTIME(Integer STARTTIME) {
+        this.STARTTIME = STARTTIME;
+    }
+
+    private Integer STARTTIME =0 ;
     private Label SecondsLabel;
     private Label MinutesLabel;
     private Label HoursLabel;
@@ -41,6 +47,8 @@ public class TimerLayout {
     private Integer STARTTIMEsec;
     private Integer STARTTIMEmins;
     private Integer STARTTIMEhours;
+
+    private boolean pressed = false;
 
     public static ArrayList<Timer> times = new ArrayList<Timer>();
 
@@ -83,14 +91,14 @@ public class TimerLayout {
         startButton = tobutton(start);
         startButton.setDisable(true);
         stopButton = tobutton(stop);
+        stopButton.setDisable(true);
         terminateButton = tobutton(terminate);
+        terminateButton.setDisable(true);
 
         playpause = new HBox();
         playpause.getChildren().addAll(startButton, stopButton, terminateButton);
         playpause.setSpacing(10);
         playpause.setAlignment(Pos.CENTER);
-        //  playpause.setDisable(true);
-
 
         container.setSpacing(2);
         container.getChildren().addAll(HoursLabel, dot, MinutesLabel, dot1, SecondsLabel);
@@ -100,64 +108,79 @@ public class TimerLayout {
         timelayout.getChildren().addAll(container, playpause);
         timelayout.setSpacing(10);
 
+        Timeline timeline = new Timeline();
+
+        stopButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+//                timeline.pause();
+                timeline.stop();
+                startButton.setDisable(false);
+                pressed = true;
+
+            }
+        });
+
+        terminateButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                timeline.stop();
+                stopButton.setDisable(true);
+                terminateButton.setDisable(true);
+                SecondsLabel.setText(String.format("%02d",00));
+                MinutesLabel.setText(String.format("%02d",00));
+                HoursLabel.setText(String.format("%02d",(00)));
+
+            }
+        });
         startButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
+                startButton.setDisable(true);
+                stopButton.setDisable(false);
+                terminateButton.setDisable(false);
+                STARTTIMEsec = times.get(0).getSecs();
+                STARTTIMEmins = times.get(0).getMinutes();
+                STARTTIMEhours = times.get(0).getHours();
+                if(pressed == false)
+                STARTTIME = STARTTIMEhours*3600 + STARTTIMEmins*60 + STARTTIMEsec;
 
-                STARTTIMEsec = times.get(0).getSecs()%60;
-                STARTTIMEmins = times.get(0).getMinutes()+times.get(0).getSecs()/60;
-                STARTTIMEhours = times.get(0).getHours()+STARTTIMEmins/60;
-
-
-
-                SecondsLabel.setText(String.format("%02d",STARTTIMEsec));
-                MinutesLabel.setText(String.format("%02d",STARTTIMEmins));
-                HoursLabel.setText(String.format("%02d",(STARTTIMEhours)));
-
-                System.out.println(start);
-                Timeline timeline = new Timeline();
                 KeyFrame keyFrame = new KeyFrame(
                         Duration.seconds(1), new EventHandler<ActionEvent>() {
                     @Override
                     public void handle(ActionEvent event) {
-                        STARTTIMEsec--;
+
+                        STARTTIMEsec = (STARTTIME%3600)%60;
+                        STARTTIMEmins = STARTTIME%3600/60;
+                        STARTTIMEhours = STARTTIME/3600;
+
                         SecondsLabel.setText(String.format("%02d",STARTTIMEsec));
-                        if (STARTTIMEsec == 0 && STARTTIMEmins !=0) {
-                            STARTTIMEmins--;
-                            MinutesLabel.setText(String.format("%02d",STARTTIMEmins));
+                        MinutesLabel.setText(String.format("%02d",STARTTIMEmins));
+                        HoursLabel.setText(String.format("%02d",(STARTTIMEhours)));
 
-                            SecondsLabel.setText(String.format("%02d",STARTTIMEsec));
-                            STARTTIMEsec = 60;
-                            if(STARTTIMEhours == 0){
-                                HoursLabel.setText(String.format("%02d",00));
-                            }
-                        }
-
-                        if (STARTTIMEmins == 0 && STARTTIMEhours!=0) {
-                            STARTTIMEhours--;
-                            HoursLabel.setText(String.format("%02d",STARTTIMEhours));
-                            STARTTIMEmins = 00;
-                            if(STARTTIMEhours==0){
-                                MinutesLabel.setText(String.format("%02d",00));
-                                STARTTIMEmins = 60;
-                                HoursLabel.setText(String.format("%02d",01));}
-                            else {
-                                STARTTIMEmins = 60;
-                                MinutesLabel.setText(String.format("%02d", 00));
-                            }
-                        }
+                        STARTTIME--;
+ //
                         if(STARTTIMEsec ==0 && STARTTIMEhours ==0&& STARTTIMEmins==0) {
                             timeline.stop();
                         }
+
+
                     }
                 }
                 );
                 timeline.setCycleCount(Timeline.INDEFINITE);
+                if(pressed == true)
+                    timeline.getKeyFrames().remove(0);
+
                 timeline.getKeyFrames().add(keyFrame);
+//                System.out.println(keyFrame.toString());
                 if(timeline!=null){
                     timeline.stop();
+
                 }
                 timeline.playFromStart();
+
+
             }
         });
     }
@@ -224,5 +247,6 @@ public class TimerLayout {
     public void setTimelayout(VBox timelayout) {
         this.timelayout = timelayout;
     }
+
 
 }
