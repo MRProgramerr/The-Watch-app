@@ -4,6 +4,13 @@ stages:
     - deploy 
 image: alpine
 
+job1: 
+    tags:
+        - ci
+    script:
+        - echo "Tools for software development"
+
+
 build:
     stage: build
     script:
